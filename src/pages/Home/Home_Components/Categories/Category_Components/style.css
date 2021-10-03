@@ -1,0 +1,34 @@
+.product__item:hover .product-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+}
+
+.shopping-cart {
+    animation: slideToRight;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.product-overlay {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #93855385;
+    z-index: 2;
+}
+
+@keyframes slideToRight {
+    0% {
+        transform: translateX(-200%) rotate(-10deg);
+    }
+    100% {
+        transform: translateX(0%) rotate(5deg);
+        padding-bottom: 5px;
+        border-bottom: 2px solid #fff;
+    }
+}

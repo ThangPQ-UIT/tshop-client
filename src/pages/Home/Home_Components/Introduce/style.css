@@ -1,0 +1,50 @@
+.intro-container {
+    position: relative;
+    height: 800px;
+    border: 1px solid green;
+}
+
+.intro-wrap {
+    position: absolute;
+    left: calc(calc(100% - 1320px)/2);
+    width: calc(1320px + calc(calc(100% - 1320px)/2));
+    background-color: #fff;
+    border: 1px solid red;
+}
+
+.sub-intro {
+    margin-left: calc(1320px / 12);
+    border: 1px solid violet;
+}
+
+.sub-intro .row {
+    width: 100%;
+    margin: 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .intro-wrap {
+        left: 0px;
+        height: 100%;
+        width: 100%;
+    }
+    .sub-intro {
+        margin-left: 0px;
+        padding: 0px 30px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .intro-wrap {
+        left: 0px;
+        height: 100%;
+        width: 100%;
+    }
+    .sub-intro {
+        margin-left: 0px;
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+        /* padding: 0px 30px; */
+    }
+}

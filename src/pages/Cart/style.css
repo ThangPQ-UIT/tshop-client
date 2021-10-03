@@ -1,0 +1,27 @@
+.test {
+    border: 1px solid red;
+    padding: 10x 0px;
+}
+
+table tr {
+    padding: 10px 0px;
+    text-align: center;
+}
+
+table td {
+    border: 1px solid red;
+}
+
+.cart-no-item-container {
+    padding: 90px 0px;
+}
+
+.continue-shopping-btn {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.continue-shopping-btn:hover {
+    color: #fff;
+    background-color: var(--main-color);
+}
