@@ -1,0 +1,126 @@
+.search__blog-input:focus-visible {
+    outline: none;
+}
+
+/* test */
+
+* {
+    --background-color: #2A2E37;
+    --transition: all .5s ease;
+    box-sizing: border-box;
+}
+
+.search-container {
+    width: 40px;
+    height: 40px;
+    background-color: var(--search-bg-color);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid var(--main-color);
+}
+
+.search-container.open {
+    width: 250px;
+}
+
+.search-container::before {
+    content: '';
+    display: block;
+    width: 2px;
+    height: 100%;
+    position: relative;
+    background-color: var(--main-color);
+    transition: var(--transition);
+}
+
+.search-container.open::before {
+    height: 30px;
+    margin: 5px 0 0px 8px;
+    position: absolute;
+}
+
+.search-box {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 20px 100px 20px 25px;
+    font-size: 1rem;
+}
+
+.search-box:focus {
+    outline: none;
+}
+
+.search-button {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--main-color);
+    display: block;
+    position: relative;
+    margin-left: 5px;
+    transition: var(--transition);
+}
+
+.search-icon::before {
+    content: '';
+    width: 2px;
+    height: 7px;
+    position: absolute;
+    right: -4px;
+    top: 13px;
+    display: block;
+    background-color: var(--main-color);
+    transform: rotate(-45deg);
+    transition: var(--transition);
+}
+
+.search-icon::after {
+    content: '';
+    width: 2px;
+    height: 7px;
+    position: absolute;
+    right: -8px;
+    top: 17px;
+    display: block;
+    background-color: var(--main-color);
+    transform: rotate(-45deg);
+    transition: var(--transition);
+}
+
+.search-container.open .search-icon {
+    margin-top: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+}
+
+.search-container.open .search-icon::before {
+    transform: rotate(53deg);
+    right: 9px;
+    top: 9px;
+    height: 8px;
+}
+
+.search-container.open .search-icon::after {
+    transform: rotate(-230deg);
+    right: 9px;
+    top: 5px;
+    height: 8px;
+}

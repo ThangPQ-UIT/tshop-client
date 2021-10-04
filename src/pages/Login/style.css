@@ -1,0 +1,17 @@
+#login {
+    background-color: var(--main-bg);
+}
+
+.login__container {
+    width: 33%;
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.login__button {
+    background-color: #b2c50b;
+}
+
+.input-field:focus {
+    outline: none;
+}

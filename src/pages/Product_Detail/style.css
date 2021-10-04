@@ -1,0 +1,9 @@
+.product__count {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+}
+
+.overlay {
+    opacity: 0.6;
+}

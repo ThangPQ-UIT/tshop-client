@@ -1,0 +1,41 @@
+.item-container:hover {
+    transform: scale(1.1);
+    transition: transform 1s;
+}
+
+.item__quickview {
+    display: none;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: #fff;
+    background-color: #93855385;
+    animation-name: quickViewSlideToTop;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+.item__image:hover .item__quickview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item__heart-icon {
+    cursor: pointer;
+}
+
+.item__heart-icon:hover img {
+    color: var(--main-color);
+}
+
+@keyframes quickViewSlideToTop {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}

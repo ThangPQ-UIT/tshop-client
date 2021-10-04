@@ -1,0 +1,34 @@
+.ecm-toast {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: #fff;
+    animation-name: slide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.ecm-toast.success {
+    background-color: #4BA155;
+}
+
+.ecm-toast.warning {
+    background-color: rgb(175, 190, 105);
+}
+
+.ecm-toast.error {
+    background-color: rgb(223, 74, 37);
+}
+
+@-webkit-keyframes slide {
+    100% {
+        right: 10px;
+    }
+}
+
+@keyframes slide {
+    100% {
+        right: 10px;
+    }
+}
