@@ -1,6 +1,9 @@
 import React from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 
+// eslint-disable-next-line no-undef
+const googleMapApi = process.env.REACT_APP_GOOGLE_MAP_API
+
 const GoogleMap = (props) => {
 
     const mapStyles = {
@@ -23,5 +26,5 @@ const GoogleMap = (props) => {
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDIiqBpfMo_JjKvKuRMwU1HY_Dw4cTFQ1E'
+    apiKey: googleMapApi
 })(GoogleMap)
