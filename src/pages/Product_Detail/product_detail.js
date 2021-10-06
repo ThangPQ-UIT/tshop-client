@@ -100,19 +100,11 @@ const ProductDetail = () => {
         }
     }
 
-    const setRelatedProduct = async (data) => {
-        try {
-            const data = await getRelatedProduct()
-            const { productList } = data
-
-            setRelatedProductList(productList)
-        } catch (error) {
-            console.log('error: ', error)
-        }
-    }
-
     const handleSelectQuantity = (e) => {
         const { value } = e.target
+        if (value < 1) {
+            return
+        }
         setQuantity(value)
     }
 
