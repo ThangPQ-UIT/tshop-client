@@ -9,10 +9,8 @@ import greaterIcon from 'assets/icons/greater.png'
 const Jounal = ({ blogList }) => {
 
     return (
-        <div style={{
-            backgroundColor: '#fff'
-        }}>
-            <Container className='border-bottom mb-3'>
+        <div>
+            <Container className='mb-3'>
                 <Row>
                     <Col lg={{ size: 10, offset: 1 }} md={{ size: 12 }} className='border-top py-5'>
                         <h3 className='mb-3' style={{

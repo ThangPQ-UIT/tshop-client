@@ -8,11 +8,11 @@ import ContactData from './contact.data'
 
 const Contact = () => {
     return (
-        <div className='main-content py-5' style={{
-            backgroundColor: '#fff'
-        }}>
+        <div className='main-content py-5'>
             <Container>
-                <h3 className='text-center mb-5 font-weight-bold'>Contact</h3>
+                <h3 className='text-center mb-5 font-weight-bold' style={{
+                    color: 'var(--main-color)'
+                }}>Contact</h3>
                 <Row className='border rounded mb-5'>
                     <Col lg='6 border-right'>
                         <div className='w-75 m-auto py-4 px-3'>

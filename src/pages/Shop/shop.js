@@ -84,7 +84,6 @@ const Shop = () => {
         if (filterRef.current && !filterRef.current.contains(event.target)) {
             setIsShowFilter(false)
         }
-
     }
 
     const handleShowFilter = () => {
@@ -117,7 +116,7 @@ const Shop = () => {
     return (
         <div className='main-content' style={{
             minHeight: `${height}px`,
-            backgroundColor: '#f9f9f6fa'
+            backgroundColor: 'var(--main-bg)'
         }}>
             <Container>
                 <Row className='py-4'>

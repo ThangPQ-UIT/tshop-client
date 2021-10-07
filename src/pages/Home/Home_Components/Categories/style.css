@@ -1,0 +1,12 @@
+.category-col {
+    height: 270px;
+}
+
+@media (max-width: 768px) {
+    .category-col {
+        height: 185px;
+    }
+    .category-col:nth-child(3) {
+        margin-top: 30px;
+    }
+}

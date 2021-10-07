@@ -67,10 +67,13 @@ const Account = () => {
 
     const setData = async () => {
         try {
-            const data = await getData()
-            const locations = await axiosInstance.get(locationAPI)
+            // const data = await getData()
+            // const locations = await axiosInstance.get(locationAPI)
+            const data = await Promise.all([getData(), axiosInstance.get(locationAPI)])
+            const userData = data[0]
+            const locations = data[1]
 
-            const { name, phoneNumber, email, address } = data
+            const { name, phoneNumber, email, address } = userData
             const { city, district, ward, street } = address
 
             // update values to location options, based on data from the server
@@ -152,13 +155,14 @@ const Account = () => {
     return (
         <div className='main-content' style={{
             minHeight: `${height}px`,
-            border: '2px solid red'
         }}>
             <Container>
                 <Row>
                     <Col lg={{ size: '6', offset: '3' }}>
                         {isLoaded && <div className='my-4 border px-5 py-3'>
-                            <h3 className='text-center'>Information contact</h3>
+                            <h3 className='text-center font-weight-bold' style={{
+                                color: 'var(--main-color)'
+                            }}>Contact information</h3>
                             <Formik
                                 initialValues={{
                                     name: formData.name,

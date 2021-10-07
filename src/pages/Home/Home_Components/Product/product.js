@@ -36,9 +36,7 @@ const Product = () => {
     }
 
     return (
-        <div style={{
-            backgroundColor: '#fff'
-        }}>
+        <div>
             <Container className='border pt-5 pb-3'>
                 <Row>
                     <Col lg={{ size: 10, offset: 1 }} className='border'>

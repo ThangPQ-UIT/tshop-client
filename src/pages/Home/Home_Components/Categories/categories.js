@@ -9,17 +9,15 @@ import './style.css'
 
 const LookingFor = () => {
     return (
-        <div style={{
-            backgroundColor: '#f9f9f6fa',
-        }}>
+        <div>
             <Container>
                 <Row className='py-5 border' style={{
-                    height: '390px'
+                    height: 'max-content'
                 }}>
                     {
                         categoryData.map(category => {
                             return (
-                                <Col key={category.id}>
+                                <Col key={category.id} md={{ size: 4 }} xs={{ size: 6 }} className='mx-auto mb-3s category-col'>
                                     <CategoryComponent
                                         bgImg={category.img}
                                         name={category.name}

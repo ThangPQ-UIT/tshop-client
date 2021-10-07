@@ -55,9 +55,9 @@ const Slider = ({ data }) => {
             {/* button left and right */}
             <div className='button-slide button-left'>
                 <button
+                    className='bg-transparent'
                     style={{
                         border: 'none',
-                        backgroundColor: '#fff'
                     }}
                     onClick={goLeft}
                 >
@@ -66,9 +66,9 @@ const Slider = ({ data }) => {
             </div>
             <div className='button-slide button-right'>
                 <button
+                    className='bg-transparent'
                     style={{
                         border: 'none',
-                        backgroundColor: '#fff'
                     }}
                     onClick={goRight}
                 >

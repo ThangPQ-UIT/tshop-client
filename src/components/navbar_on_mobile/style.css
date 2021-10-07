@@ -1,0 +1,8 @@
+.navbar-on-mobile {
+    position: absolute;
+    background-color: var(--main-color);
+    top: 0px;
+    left: 0px;
+    width: 70vw;
+    height: 100vh;
+}

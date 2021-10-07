@@ -12,6 +12,7 @@ import logoutIcon from 'assets/icons/logout.svg'
 import { logout as logOutAction } from 'redux/reducers/user/user.actions'
 
 import './style.css'
+import NarbarOnMobile from 'components/navbar_on_mobile/navbar_on_mobile'
 
 const Header = () => {
 
@@ -22,6 +23,7 @@ const Header = () => {
     const user = useSelector(state => state.user)
     const cart = useSelector(state => state.cart)
 
+    const [isShowNavbar, setIsShowNavbar] = useState(false)
     const [isShowUserInfor, setIsShowUserInfor] = useState(false)
     const [borderBottomHeader, setBorderBottomHeader] = useState(false)
 
@@ -85,13 +87,17 @@ const Header = () => {
         console.log('event: ', e.target)
     }
 
+    const handleShowHideNavbarOnMobile = () => {
+        setIsShowNavbar(!isShowNavbar)
+    }
+
     console.log('header rerender')
 
     return (
-        <div id='header'>
-            <Container className='border-bottomss h-100' style={{
-                borderBottom: borderBottomHeader ? '1px solid var(--main-lighter-color)' : ''
-            }}>
+        <div id='header' style={{
+            boxShadow: borderBottomHeader ? '0 2px 2px 0 var(--main-lighter-color)' : ''
+        }}>
+            <Container className='border-bottomss h-100'>
                 <Row className='h-100'>
                     <Col xs='2' sm='8' md='2' lg='2'>
                         <div className='header-brand h-100 d-flex align-items-center'>
@@ -153,7 +159,8 @@ const Header = () => {
                                     Contact
                                 </NavLink>
                             </li>
-                        </ul></Col>
+                        </ul>
+                    </Col>
                     <Col xs='5' sm='4' md='2' lg='5' className='d-md-flex d-none justify-content-end align-items-center '>
                         <div className='d-sm-flex justify-content-md-between justify-content-lg-end w-100'>
                             <Link to='/wishlist' className='mr-lg-4 pr-md-0 p-0 border-0 bg-transparent'>
@@ -235,9 +242,14 @@ const Header = () => {
                     </Col>
                     {/* only show on the smaller screeen */}
                     <Col className='d-flex justify-content-end align-items-center d-md-none'>
-                        <img src={barsIcon} alt='bars icon' height='24px' width='24px' />
+                        <img src={barsIcon} alt='bars icon' height='24px' width='24px' onClick={handleShowHideNavbarOnMobile} />
                     </Col>
                 </Row>
+                {isShowNavbar && <NarbarOnMobile
+                    isAuthenticated={isAuthenticated}
+                    handleShowHideNavbarOnMobile={handleShowHideNavbarOnMobile}
+                    name={name}
+                />}
             </Container>
         </div>
     )

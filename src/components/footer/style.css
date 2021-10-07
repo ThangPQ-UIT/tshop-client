@@ -1,3 +1,4 @@
 #footer {
     border-top: 1px solid var(--main-lighter-color);
+    background-color: var(--main-lighter-color);
 }

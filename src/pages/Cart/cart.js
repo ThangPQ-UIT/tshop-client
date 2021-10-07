@@ -100,6 +100,9 @@ const Cart = () => {
             minHeight: `${height}px`
         }}>
             <Container>
+                <h3 className='text-center font-weight-bold mb-5' style={{
+                    color: 'var(--main-color)'
+                }}>Shopping cart</h3>
                 {idList.length ? (
                     <Row>
                         <Col lg='7' className='border-right pr-3'>
@@ -127,7 +130,7 @@ const Cart = () => {
                             >
                                 <p style={{
                                     fontWeight: '400'
-                                }}>Moi thong tin cua quy khach se duoc bao mat</p>
+                                }}>All of your information will be secured</p>
                                 <p style={{
                                     fontWeight: '400'
                                 }}>Delivery expenses: <span>0</span></p>

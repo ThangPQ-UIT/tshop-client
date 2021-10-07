@@ -49,9 +49,7 @@ const Blog = () => {
     }
 
     return (
-        <div className='main-content py-5' style={{
-            backgroundColor: '#fff',
-        }}>
+        <div className='main-content py-5'>
             <Container>
                 <h3 className='text-center mb-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
