@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './style.css'
+
 const Blog = ({ data }) => {
 
     const date = new Date(data.created_at)
@@ -9,10 +11,8 @@ const Blog = ({ data }) => {
     const year = date.getFullYear()
 
     return (
-        <div>
-            <div style={{
-                height: '300px',
-            }}>
+        <div className=''>
+            <div className='home-blog-item-img' >
                 <img
                     src={data.thumbnail_image}
                     alt='blog img' width='100%' height='100%'

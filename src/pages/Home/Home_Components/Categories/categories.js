@@ -14,20 +14,24 @@ const LookingFor = () => {
                 <Row className='py-5 border' style={{
                     height: 'max-content'
                 }}>
-                    {
-                        categoryData.map(category => {
-                            return (
-                                <Col key={category.id} md={{ size: 4 }} xs={{ size: 6 }} className='mx-auto mb-3s category-col'>
-                                    <CategoryComponent
-                                        bgImg={category.img}
-                                        name={category.name}
-                                        linkTo={category.linkTo}
-                                        description={category.description}
-                                    />
-                                </Col>
-                            )
-                        })
-                    }
+                    <Col lg={{ size: 10, offset: 1 }}>
+                        <Row>
+                            {
+                                categoryData.map(category => {
+                                    return (
+                                        <Col key={category.id} md={{ size: 4 }} xs={{ size: 6 }} className='mx-auto category-col'>
+                                            <CategoryComponent
+                                                bgImg={category.img}
+                                                name={category.name}
+                                                linkTo={category.linkTo}
+                                                description={category.description}
+                                            />
+                                        </Col>
+                                    )
+                                })
+                            }
+                        </Row>
+                    </Col>
                 </Row>
             </Container>
         </div>

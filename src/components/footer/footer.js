@@ -23,7 +23,7 @@ const Footer = () => {
         <div id='footer'>
             <Container className='pt-3'>
                 <Row className='pb-3'>
-                    <Col lg='3' md='6' className='px-lg-0 pb-4'>
+                    <Col lg='3' md='6' sm='6' xs='12' className='px-lg-0 pb-4'>
                         <p className=' fw-bolder'>Durotan</p>
                         <p>268, Hoang Van Thu street, ward 2, Tan Binh district, Ho Chi Minh city</p>
                         <p>+84 00000 0000</p>
@@ -46,18 +46,18 @@ const Footer = () => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col lg={{ size: '2', offset: '1' }} md='6' className='px-lg-0 pb-3'>
+                    <Col lg={{ size: '2', offset: '1' }} md='6' sm='6' xs='6' className='px-lg-0 pb-3'>
                         <p className='fw-bolder'>Shopping</p>
                         <p>short</p>
                         <p>sandal</p>
                         <p>hight top</p>
                     </Col>
-                    <Col lg={{ size: '2', offset: '1' }} md='6' className='pb-3'>
+                    <Col lg={{ size: '2', offset: '1' }} md='6' sm='6' xs='6' className='pb-3'>
                         <p className='fw-bolder'>Contact</p>
                         <p>Contact us</p>
                         <p>0983162152</p>
                     </Col>
-                    <Col lg='3' md='6' className='px-lg-0'>
+                    <Col lg='3' md='6' sm='6' xs='6' className='px-lg-0'>
                         <p className='fw-bolder'>New letters</p>
                         <p className='small'>Be the first to get the latest news about trend, promotions and much more</p>
                         <input className='w-100 py-2 small' placeholder='Enter your email address' /><br></br>

@@ -11,8 +11,6 @@ const Blog = () => {
 
     const [blogList, setBlogList] = useState()
     const [isOpen, setIsOpen] = useState(false)
-    const [searchValue, setSearchValue] = useState('')
-    const [placeHolder, setPlaceHolder] = useState('Search')
 
     const getData = async () => {
         const response = await axiosInstance.get('/blogs')
@@ -29,21 +27,6 @@ const Blog = () => {
         setData()
     }, [])
 
-    const handleSearch = (e) => {
-        const { value } = e.target
-        setSearchValue(value)
-    }
-
-    const handleInputClick = (e) => {
-        setPlaceHolder('')
-    }
-
-    const handleInputBlur = () => {
-        if (!placeHolder) {
-            setPlaceHolder('Search')
-        }
-    }
-
     const toggleSearchInput = () => {
         setIsOpen(!isOpen)
     }
@@ -54,30 +37,14 @@ const Blog = () => {
                 <h3 className='text-center mb-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
                 }}>Blog</h3>
-                <Row>
-                    <div className='position-relative mb-3 d-flex rounded' style={{
-                        backgroundColor: '#fff'
-                    }}>
-                        <span className='border-0 pl-2' style={{
-                            margin: 'auto 0px'
-                        }}>
-                            <img src={searchIcon} alt='search icons' width='20px' height='20px' />
-                        </span>
-                        <input
-                            type='search'
-                            placeholder={placeHolder}
-                            className='p-2 rounded-2 border-left-0 search__blog-input'
-                            value={searchValue}
-                            onChange={handleSearch}
-                            onBlur={handleInputBlur}
-                            onClick={handleInputClick}
-                        />
-                    </div>
-                </Row>
                 <div className={isOpen ? 'search-container open' : 'search-container'} style={{
                     marginBottom: '20px'
                 }}>
-                    <input type='search' className='search-box' placeholder='Search' />
+                    <input
+                        type='search'
+                        className='search-box'
+                        placeholder='Search'
+                    />
                     <span className='search-button' onClick={toggleSearchInput}>
                         <span className='search-icon'></span>
                     </span>

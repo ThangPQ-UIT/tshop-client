@@ -1,0 +1,9 @@
+.home-blog-item-img {
+    height: 250px;
+}
+
+@media only screen and (max-width: 768px) {
+    .home-blog-item-img {
+        height: 200px;
+    }
+}

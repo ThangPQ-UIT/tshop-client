@@ -50,7 +50,7 @@ const Jounal = ({ blogList }) => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={{ size: 10, offset: 1 }} md={{ size: 12 }} className='pb-5'>
+                    <Col lg={{ size: 10, offset: 1 }} className='pb-5'>
                         <Row>
                             {blogList.map((blog) => {
                                 return (

@@ -99,7 +99,7 @@ const Header = () => {
         }}>
             <Container className='border-bottomss h-100'>
                 <Row className='h-100'>
-                    <Col xs='2' sm='8' md='2' lg='2'>
+                    <Col xs='6' sm='8' md='2' lg='2'>
                         <div className='header-brand h-100 d-flex align-items-center'>
                             <Link to='/' className='text-decoration-none' style={{
                                 color: 'var(--main-color)'
@@ -108,7 +108,7 @@ const Header = () => {
                             </Link>
                         </div>
                     </Col>
-                    <Col xs='5' sm='0' md='8' lg='5' className='d-none d-md-block'>
+                    <Col xs='0' sm='0' md='6' lg='5' className='d-none d-md-block'>
                         <ul className='h-100 d-flex justify-content-evenly align-items-center p-0 m-0'>
                             <li className='nav-link-list list-unstyled py-3'>
                                 <NavLink
@@ -161,16 +161,14 @@ const Header = () => {
                             </li>
                         </ul>
                     </Col>
-                    <Col xs='5' sm='4' md='2' lg='5' className='d-md-flex d-none justify-content-end align-items-center '>
-                        <div className='d-sm-flex justify-content-md-between justify-content-lg-end w-100'>
-                            <Link to='/wishlist' className='mr-lg-4 pr-md-0 p-0 border-0 bg-transparent'>
+                    <Col xs='0' sm='0' md='4' lg='5' className='d-md-flex d-none justify-content-end align-items-center'>
+                        <div className='d-sm-flex justify-content-end w-100'>
+                            <Link to='/wishlist' className='mr-4 pr-md-0 p-0 border-0 bg-transparent'>
                                 <img src={heartIcon} alt='heart icon' className='p-0'
                                     onMouseEnter={handleIcon}
                                 />
                             </Link>
-                            <div className='mr-lg-4 pr-md-0 p-0 bg-transparent' style={{
-                                position: 'relative',
-                            }}>
+                            <div className='mr-4 pr-md-0 p-0 bg-transparent position-relative'>
                                 <Link to='/cart'>
                                     <img src={bagIcon} alt='bag icon' />
                                 </Link>
@@ -241,14 +239,19 @@ const Header = () => {
                         </div>
                     </Col>
                     {/* only show on the smaller screeen */}
-                    <Col className='d-flex justify-content-end align-items-center d-md-none'>
-                        <img src={barsIcon} alt='bars icon' height='24px' width='24px' onClick={handleShowHideNavbarOnMobile} />
+                    <Col xs='6' sm='4' className='d-flex justify-content-end align-items-center d-md-none'>
+                        <div className='border p-2 rounded'>
+                            <img src={barsIcon} alt='bars icon' height='24px' width='24px' onClick={handleShowHideNavbarOnMobile} style={{
+                                cursor: 'pointer'
+                            }} />
+                        </div>
                     </Col>
                 </Row>
                 {isShowNavbar && <NarbarOnMobile
                     isAuthenticated={isAuthenticated}
                     handleShowHideNavbarOnMobile={handleShowHideNavbarOnMobile}
                     name={name}
+                    cart={cart}
                 />}
             </Container>
         </div>
