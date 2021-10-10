@@ -10,7 +10,7 @@ const Banner = () => {
 
     return (
         <>
-            <div id='banner'>
+            <div id='banner-container' className='p-0'>
                 {bannerData.map((banner, index) =>
                     <BannerComponent
                         key={banner.id}

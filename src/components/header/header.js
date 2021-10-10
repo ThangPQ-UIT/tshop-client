@@ -163,7 +163,7 @@ const Header = () => {
                     </Col>
                     <Col xs='0' sm='0' md='4' lg='5' className='d-md-flex d-none justify-content-end align-items-center'>
                         <div className='d-sm-flex justify-content-end w-100'>
-                            <Link to='/wishlist' className='mr-4 pr-md-0 p-0 border-0 bg-transparent'>
+                            <Link to='/wishlist' className='mr-4 border-0 bg-transparent'>
                                 <img src={heartIcon} alt='heart icon' className='p-0'
                                     onMouseEnter={handleIcon}
                                 />

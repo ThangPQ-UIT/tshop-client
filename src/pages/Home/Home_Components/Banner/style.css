@@ -1,14 +1,11 @@
-#banner {
-    width: 100%;
-    height: 660px;
+#banner-container {
+    width: 100vw;
     padding: 0px;
     position: relative;
     margin: 0px auto;
-    overflow: hidden;
-    background-color: #ECECEC;
 }
 
-#banner>* {
+#banner-container>* {
     min-width: 100%;
     height: 100%;
     position: absolute;
@@ -17,11 +14,11 @@
     animation: 8s autoplay2 infinite ease-in-out;
 }
 
-#banner>*:nth-child(1) {
+#banner-container>*:nth-child(1) {
     animation-delay: 0s;
 }
 
-#banner>*:nth-child(2) {
+#banner-container>*:nth-child(2) {
     animation-delay: 4s;
 }
 
@@ -43,22 +40,40 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
-    .banner-row-test {
-        /* background-color: white; */
-        background-image: none;
-    }
-    .img-banner {
-        display: none;
+/* Small devices (landscape phones, 576px and up) */
+
+@media (max-width: 576px) {
+    #banner-container {
+        height: 300px;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .banner-row-test {
-        /* background-color: white; */
-        background-image: none;
+@media (min-width: 576px) {
+    #banner-container {
+        height: 400px;
     }
-    .img-banner {
-        display: none;
+}
+
+/* Medium devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    #banner-container {
+        height: 500px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    #banner-container {
+        height: 600px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    #banner-container {
+        height: 660px;
     }
 }
