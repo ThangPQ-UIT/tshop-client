@@ -7,6 +7,8 @@ import Slider from 'components/slider/slider'
 import greaterIcon from 'assets/icons/greater.png'
 import axiosInstance from 'api'
 
+import './style.css'
+
 const Product = () => {
 
     const [productList, setProductList] = useState()
@@ -109,15 +111,17 @@ const Product = () => {
                         </div>
                     </Col>
                 </Row>
-                {
-                    productList ? (
-                        <div className='pb-5 pt-5'>
-                            <Slider data={productList} itemWidth='one-fourth' />
-                        </div>
-                    ) : (
-                        <p>loading...</p>
-                    )
-                }
+                <Row>
+                    {
+                        productList ? (
+                            <div className='py-5 home__product-slider'>
+                                <Slider data={productList} itemWidth='one-fourth' />
+                            </div>
+                        ) : (
+                            <p>loading...</p>
+                        )
+                    }
+                </Row>
             </Container>
         </div>
     )

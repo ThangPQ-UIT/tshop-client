@@ -261,7 +261,9 @@ const ProductDetail = () => {
                     relatedProductList && (
                         <Row className='pb-5'>
                             <p className='text-center display-6 mb-5'>Related Products</p>
-                            <Slider data={relatedProductList} />
+                            <div className='p-3 home__product-slider'>
+                                <Slider data={relatedProductList} />
+                            </div>
                         </Row>
                     )
                 }

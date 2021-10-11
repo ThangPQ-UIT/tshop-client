@@ -42,26 +42,21 @@ const Slider = ({ data }) => {
     }
 
     return (
-        <div className='pr-slider'>
+        <div className='h-100 pr-slider'>
             <div className='pr-slide'>
                 {data.map((item, index) => {
                     return (
-                        <div style={style} className='pr-slide-item' key={index}>
-                            <SlideItem data={item} />
-                        </div>
+                        <SlideItem style={style} data={item} key={index} />
                     )
                 })}
             </div>
             {/* button left and right */}
             <div className='button-slide button-left'>
                 <button
-                    className='bg-transparent'
-                    style={{
-                        border: 'none',
-                    }}
+                    className='bg-transparent border-0'
                     onClick={goLeft}
                 >
-                    <img src={lessIcon} />
+                    <img src={lessIcon} className='btn-icon' />
                 </button>
             </div>
             <div className='button-slide button-right'>
@@ -72,7 +67,7 @@ const Slider = ({ data }) => {
                     }}
                     onClick={goRight}
                 >
-                    <img src={greaterIcon} />
+                    <img src={greaterIcon} className='btn-icon' />
                 </button>
             </div>
         </div>
