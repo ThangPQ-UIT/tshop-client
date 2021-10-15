@@ -1,3 +1,15 @@
 .home__product-slider {
     height: 380px;
 }
+
+@media (max-width: 576px) {
+    .home__product-slider {
+        height: 330px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .home__product-slider {
+        height: 350px;
+    }
+}

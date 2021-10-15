@@ -1,34 +1,59 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
-import searchIcon from 'assets/icons/search_main_color.svg'
 import axiosInstance from 'api'
 
 import './style.css'
 
 const Blog = () => {
 
+    const searchInputRef = useRef(null)
+
     const [blogList, setBlogList] = useState()
     const [isOpen, setIsOpen] = useState(false)
+    const [searchData, setSearchData] = useState('')
+    const [filterValue, setFilterValue] = useState('all')
 
-    const getData = async () => {
-        const response = await axiosInstance.get('/blogs')
+    const getData = async (searchValue) => {
+        if (!searchValue) {
+            searchValue = ''
+        }
+
+        const response = await axiosInstance.get(`/blogs?title=${searchValue}&category=${filterValue}`)
         const { result } = response.data
         return result
     }
 
-    const setData = async () => {
-        const data = await getData()
+    const setData = async (searchValue) => {
+        console.log('set data')
+        const data = await getData(searchValue)
         setBlogList(data)
     }
 
     useEffect(() => {
         setData()
-    }, [])
+    }, [filterValue])
 
     const toggleSearchInput = () => {
         setIsOpen(!isOpen)
+    }
+
+    const handleSearchChange = (event) => {
+        const { value } = event.target
+        setSearchData(value)
+
+        if (searchInputRef.current) {
+            clearTimeout(searchInputRef.current)
+        }
+        searchInputRef.current = setTimeout(() => {
+            setData(value)
+        }, 300)
+    }
+
+    const handleCategoryChange = (event) => {
+        const { value } = event.target
+        setFilterValue(value)
     }
 
     return (
@@ -37,16 +62,22 @@ const Blog = () => {
                 <h3 className='text-center mb-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
                 }}>Blog</h3>
-                <div className={isOpen ? 'search-container open' : 'search-container'} style={{
-                    marginBottom: '20px'
-                }}>
+                <div
+                    className={isOpen ? 'blog__search-container rounded open' : 'blog__search-container rounded'}
+                    style={{
+                        marginBottom: '20px'
+                    }}
+                >
                     <input
                         type='search'
-                        className='search-box'
+                        value={searchData}
+                        className='blog__search-box bg-white rounded'
                         placeholder='Search'
+                        onChange={handleSearchChange}
+                        ref={searchInputRef}
                     />
-                    <span className='search-button' onClick={toggleSearchInput}>
-                        <span className='search-icon'></span>
+                    <span className='blog__search-button' onClick={toggleSearchInput}>
+                        <span className='blog__search-icon'></span>
                     </span>
                 </div>
                 <Row>
@@ -96,15 +127,13 @@ const Blog = () => {
                         )}
                     </Col>
                     <Col lg='4'>
-                        <div style={{
-                            backgroundColor: 'var(--main-lighter-color)'
-                        }}>
-                            <div>
-                                <p>Categories</p>
-                                <p className='border-bottom pb-2'>Fashion</p>
-                                <p className='border-bottom pb-2'>News</p>
-                                <p className='border-bottom pb-2'>About</p>
-                            </div>
+                        <div>
+                            <select className='rounded blog__category-select' onChange={handleCategoryChange} value={filterValue}>
+                                <option value='all'>Categories</option>
+                                <option className='border-bottom b-2' value='fashion'>Fashion</option>
+                                <option className='border-bottom b-2' value='news'>News</option>
+                                <option className='border-bottom b-2' value='about'>About</option>
+                            </select>
                         </div>
                     </Col>
                 </Row>

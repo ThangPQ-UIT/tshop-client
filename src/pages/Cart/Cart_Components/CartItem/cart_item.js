@@ -15,7 +15,7 @@ const CartItem = ({ id, name, size, color, price, imgSrc, quantity }) => {
     }
 
     return (
-        <div className='d-flex justify-content-between w-100 border-bottom py-4'>
+        <div className='d-flex justify-content-between w-100 border-bottom py-3'>
             <div className='d-flex'>
                 <div className='mr-4'>
                     <Link to={`/shop/${id}`}>

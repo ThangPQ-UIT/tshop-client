@@ -228,7 +228,7 @@ const Account = () => {
                                                     handleChange(event)
                                                 }}
                                             >
-                                                <option>Select your city</option>
+                                                <option>Select city</option>
                                                 {locationData && locationData.map(location => {
                                                     return (
                                                         <option key={location.code}>{location.name}</option>
@@ -247,7 +247,7 @@ const Account = () => {
                                                     handleChange(event)
                                                 }}
                                             >
-                                                <option>Select your district</option>
+                                                <option>Select district</option>
                                                 {districtList && districtList.map(district => {
                                                     return (
                                                         <option key={district.code}>{district.name}</option>
@@ -263,7 +263,7 @@ const Account = () => {
                                                 value={values.ward}
                                                 onChange={handleChange}
                                             >
-                                                <option>Select your ward</option>
+                                                <option>Select ward</option>
                                                 {wardList && wardList.map(ward => {
                                                     return <option key={ward.code}> {ward.name}</option>
                                                 })}

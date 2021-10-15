@@ -8,18 +8,20 @@ import ContactData from './contact.data'
 
 const Contact = () => {
     return (
-        <div className='main-content py-5'>
+        <div className='main-content'>
             <Container>
-                <h3 className='text-center mb-5 font-weight-bold' style={{
+                <h3 className='text-center py-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
                 }}>Contact</h3>
-                <Row className='border rounded mb-5'>
+                <Row className='rounded mb-5'>
                     <Col lg='6 border-right'>
-                        <div className='w-75 m-auto py-4 px-3'>
-                            <p className='text-center'>Send Us A Message</p>
+                        <div className='w-75 m-auto pb-4 px-3'>
+                            <h4 className='text-center mb-4'>Send Us A Message</h4>
                             <input type='text' placeholder='Your Email Address' className='w-100 mb-3 pl-2' />
                             <textarea rows="8" placeholder='How Can We Help?' className='w-100 pl-2 pt-2' />
-                            <button className='w-100 border-0 mt-3 rounded py-1'>SUBMIT</button>
+                            <button className='w-100 border-0 mt-3 rounded py-2 text-white' style={{
+                                backgroundColor: 'var(--main-color)'
+                            }}>SUBMIT</button>
                         </div>
                     </Col>
                     <Col lg='6'>

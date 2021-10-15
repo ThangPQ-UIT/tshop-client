@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap'
 
 import Item from './Item_Component/item'
 
-import { shopData, categoriesOptionList } from './shop.data'
+import { categoriesOptionList } from './shop.data'
 
 import filterIcon from 'assets/icons/filter.svg'
 import searchIcon from 'assets/icons/search_main_color.svg'
@@ -57,7 +57,7 @@ const Shop = () => {
                 searchData = ''
             }
 
-            const response = await axiosInstance.get(`/products?limit=${8}&&current_page=${currentPage}&&search=${searchData}&price_type=${filterByPrice}`)
+            const response = await axiosInstance.get(`/products?limit=${8}&&current_page=${currentPage}&&name=${searchData}&price_type=${filterByPrice}`)
             const data = response.data
 
             return data

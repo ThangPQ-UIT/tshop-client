@@ -2,7 +2,11 @@
     outline: none;
 }
 
-/* test */
+.blog__category-select {
+    padding: 10px 120px 10px 10px;
+    color: var(--main-color);
+    outline: none;
+}
 
 * {
     --background-color: #2A2E37;
@@ -10,7 +14,7 @@
     box-sizing: border-box;
 }
 
-.search-container {
+.blog__search-container {
     width: 40px;
     height: 40px;
     background-color: var(--search-bg-color);
@@ -20,11 +24,11 @@
     border: 1px solid var(--main-color);
 }
 
-.search-container.open {
+.blog__search-container.open {
     width: 250px;
 }
 
-.search-container::before {
+.blog__search-container::before {
     content: '';
     display: block;
     width: 2px;
@@ -34,13 +38,13 @@
     transition: var(--transition);
 }
 
-.search-container.open::before {
+.blog__search-container.open::before {
     height: 30px;
     margin: 5px 0 0px 8px;
     position: absolute;
 }
 
-.search-box {
+.blog__search-box {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -51,11 +55,11 @@
     font-size: 1rem;
 }
 
-.search-box:focus {
+.blog__search-box:focus {
     outline: none;
 }
 
-.search-button {
+.blog__search-button {
     box-sizing: border-box;
     width: 40px;
     height: 40px;
@@ -67,7 +71,7 @@
     cursor: pointer;
 }
 
-.search-icon {
+.blog__search-icon {
     width: 20px;
     height: 20px;
     border-radius: 20px;
@@ -78,7 +82,7 @@
     transition: var(--transition);
 }
 
-.search-icon::before {
+.blog__search-icon::before {
     content: '';
     width: 2px;
     height: 7px;
@@ -91,7 +95,7 @@
     transition: var(--transition);
 }
 
-.search-icon::after {
+.blog__search-icon::after {
     content: '';
     width: 2px;
     height: 7px;
@@ -104,21 +108,21 @@
     transition: var(--transition);
 }
 
-.search-container.open .search-icon {
+.blog__search-container.open .blog__search-icon {
     margin-top: 3px;
     width: 24px;
     height: 24px;
     border-radius: 24px;
 }
 
-.search-container.open .search-icon::before {
+.blog__search-container.open .blog__search-icon::before {
     transform: rotate(53deg);
     right: 9px;
     top: 9px;
     height: 8px;
 }
 
-.search-container.open .search-icon::after {
+.blog__search-container.open .blog__search-icon::after {
     transform: rotate(-230deg);
     right: 9px;
     top: 5px;

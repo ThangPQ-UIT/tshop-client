@@ -1,5 +1,4 @@
 import React from 'react'
-import { Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 import shoppingCartIcon from 'assets/icons/shopping-cart.svg'
@@ -21,10 +20,8 @@ const Category = ({ bgImg, name, linkTo, description }) => {
                 left: '30px',
                 top: '20px',
             }}>
-                <p className='text-capitalize' style={{
-                    fontFamily: 'antic- didon',
-                    fontSize: '2.5rem',
-                    margin: '0px'
+                <p className='text-capitalize home__category-name' style={{
+
                 }}>{name}</p>
                 <p className='text-capitalize'>{description}</p>
             </div>

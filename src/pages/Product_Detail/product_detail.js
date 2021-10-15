@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
 import Slider from 'components/slider/slider'
@@ -15,6 +15,7 @@ import cartNotificationAction from 'redux/reducers/cartNotification/cartNotifica
 const ProductDetail = () => {
 
     const dispatch = useDispatch()
+    const location = useLocation()
 
     const { id } = useParams()
 
@@ -34,7 +35,7 @@ const ProductDetail = () => {
     const [relatedProductList, setRelatedProductList] = useState()
 
     useEffect(() => {
-
+        window.scrollTo(0, 0)
         // Set height for component
         const header = document.getElementById('header')
         const footer = document.getElementById('footer')
@@ -46,10 +47,9 @@ const ProductDetail = () => {
         const cartHeight = screenHeight - headerHeight - footerHeight
 
         setHeight(cartHeight)
-
         setData()
 
-    }, [])
+    }, [location])
 
     const addToCart = () => {
         // get color having 1st position to pass default color

@@ -1,9 +1,52 @@
-.home-blog-item-img {
+.home__blog-item {
     height: 250px;
 }
 
-@media only screen and (max-width: 768px) {
-    .home-blog-item-img {
+.home__blog-item-img {
+    object-fit: fill;
+}
+
+.home__blog-item-day {
+    font-size: 3rem;
+    font-family: 'antic-didon';
+}
+
+.home__blog-item-month, .home__blog-item-year {
+    font-size: 0.9rem;
+}
+
+.home__blog-item-title {
+    font-size: 1.3rem;
+    color: var(--main-color);
+    font-family: 'antic-didon';
+}
+
+@media only screen and (max-width: 576px) {
+    .home__blog-item {
         height: 200px;
+    }
+    .home__blog-item-day {
+        font-size: 2rem;
+    }
+    .home__blog-item-month, .home__blog-item-year {
+        font-size: 0.7rem;
+    }
+    .home__blog-item-title {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 577px) and(max-width: 768px) {
+    .home__blog-item {
+        height: 220px;
+    }
+    .home__blog-item-day {
+        font-size: 2.1rem;
+    }
+    .home__blog-item-month, .home__blog-item-year {
+        font-size: 0.8rem;
+    }
+    .home__blog-item-title {
+        font-size: 1.1rem;
     }
 }

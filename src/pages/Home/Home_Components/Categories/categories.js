@@ -11,7 +11,7 @@ const LookingFor = () => {
     return (
         <div>
             <Container>
-                <Row className='py-5 border' style={{
+                <Row className='py-5' style={{
                     height: 'max-content'
                 }}>
                     <Col lg={{ size: 10, offset: 1 }}>

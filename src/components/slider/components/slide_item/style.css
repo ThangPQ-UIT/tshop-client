@@ -5,6 +5,10 @@
     transition: 1s;
 }
 
+.pr-slide-item>a {
+    text-decoration-color: var(--main-color);
+}
+
 @media only screen and (max-width: 600px) {
     .pr-slide-item {
         min-width: 50%;
@@ -27,6 +31,7 @@
 }
 
 .slide__item-name {
+    color: var(--main-color);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;

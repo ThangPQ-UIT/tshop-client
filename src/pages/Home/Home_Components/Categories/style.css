@@ -2,11 +2,35 @@
     height: 270px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
+    .category-col {
+        height: 150px;
+    }
+    .category-col:nth-child(3) {
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
     .category-col {
         height: 185px;
     }
     .category-col:nth-child(3) {
         margin-top: 30px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    .category-col {
+        height: 215px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+    .category-col {
+        height: 235px;
+    }
+    .category-col:nth-child(3) {
+        margin-top: 0px;
     }
 }

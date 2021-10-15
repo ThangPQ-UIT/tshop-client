@@ -1,0 +1,35 @@
+.checkout__cart-infor-container {
+    max-height: 380px;
+    overflow: scroll;
+    overflow-x: hidden;
+    border-top: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+.user-infor__email-field, .user-infor__phone-field {
+    width: 50%;
+    padding-right: 16px;
+}
+
+.user-infor__phone-field {
+    padding-left: 16px;
+}
+
+.user-infor__name-field {
+    padding-right: 16px;
+    width: 50%;
+}
+
+@media screen and (max-width: 576px) {
+    .checkout__user-infor-container {
+        flex-direction: column;
+    }
+    .user-infor__email-field, .user-infor__phone-field {
+        width: 100%;
+        padding: 0px;
+    }
+    .user-infor__name-field {
+        padding-right: 0px;
+        width: 100%;
+    }
+}

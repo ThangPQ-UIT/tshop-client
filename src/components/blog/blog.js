@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './style.css'
 
 const Blog = ({ data }) => {
-
+    console.log('data: ', data)
     const date = new Date(data.created_at)
 
     const day = date.getDate()
@@ -12,33 +13,21 @@ const Blog = ({ data }) => {
 
     return (
         <div className=''>
-            <div className='home-blog-item-img' >
+            <div className='home__blog-item' >
                 <img
                     src={data.thumbnail_image}
+                    className='home__blog-item-img'
                     alt='blog img' width='100%' height='100%'
-                    style={{
-                        objectFit: 'fill'
-                    }}
                 />
             </div>
             <div className='d-flex'>
                 <div className='mr-3'>
-                    <p className='m-0' style={{
-                        fontSize: '3rem',
-                        fontFamily: 'antic-didon'
-                    }}>{day}</p>
-                    <p className='text-uppercase' style={{
-                        fontSize: '0.9rem',
-                    }}>{month}</p>
-                    <p style={{
-                        fontSize: '0.9rem'
-                    }}>{year}</p>
+                    <p className='m-0 home__blog-item-day'>{day}</p>
+                    <p className='text-uppercase home__blog-item-month'>{month}</p>
+                    <p className='text-uppercase home__blog-item-year'>{year}</p>
                 </div>
                 <div>
-                    <a href='' style={{
-                        fontSize: '1.3rem',
-                        fontFamily: 'antic-didon'
-                    }}>{data.title}</a>
+                    <Link to={`/blog/${data.slug}`} className='home__blog-item-title'>{data.title}</Link>
                     <div className='d-flex'>
                         <p style={{
                             fontSize: '0.8rem',

@@ -39,9 +39,9 @@ const Product = () => {
 
     return (
         <div>
-            <Container className='border pt-5 pb-3'>
+            <Container className='border-top pt-5 pb-3'>
                 <Row>
-                    <Col lg={{ size: 10, offset: 1 }} className='border'>
+                    <Col lg={{ size: 10, offset: 1 }}>
                         <h3 style={{
                             fontSize: '2rem',
                             fontFamily: 'antic-didon'
@@ -55,9 +55,8 @@ const Product = () => {
                                         <NavLink
                                             exact
                                             to='/'
-                                            className='header__nav-link  text-decoration-none'
+                                            className='text-decoration-none'
                                             activeStyle={{
-                                                fontWeight: 'bold',
                                                 color: 'var(--main-color)'
                                             }}
                                             style={{
@@ -74,9 +73,8 @@ const Product = () => {
                                         <NavLink
                                             exact
                                             to='/'
-                                            className='header__nav-link  text-decoration-none text-uppercase'
+                                            className='text-decoration-none text-uppercase'
                                             activeStyle={{
-                                                fontWeight: 'bold',
                                                 color: 'var(--main-color)'
                                             }}
                                             style={{
@@ -92,9 +90,8 @@ const Product = () => {
                                 <NavLink
                                     exact
                                     to='/'
-                                    className='header__nav-link  text-decoration-none'
+                                    className='text-decoration-none'
                                     activeStyle={{
-                                        fontWeight: 'bold',
                                         color: 'var(--main-color)'
                                     }}
                                     style={{
