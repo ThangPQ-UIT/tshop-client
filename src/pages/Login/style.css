@@ -15,3 +15,27 @@
 .input-field:focus {
     outline: none;
 }
+
+@media only screen and (max-width: 576px) {
+    .login__container {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .login__container {
+        width: 65%;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    .login__container {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    .login__container {
+        width: 40%;
+    }
+}
