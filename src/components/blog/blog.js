@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './style.css'
 
 const Blog = ({ data }) => {
-    console.log('data: ', data)
+
     const date = new Date(data.created_at)
 
     const day = date.getDate()

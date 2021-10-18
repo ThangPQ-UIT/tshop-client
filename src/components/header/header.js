@@ -91,8 +91,6 @@ const Header = () => {
         setIsShowNavbar(!isShowNavbar)
     }
 
-    console.log('header rerender')
-
     return (
         <div id='header' style={{
             boxShadow: borderBottomHeader ? '0 2px 2px 0 var(--main-lighter-color)' : ''

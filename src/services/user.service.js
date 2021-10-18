@@ -1,4 +1,5 @@
 import axiosInstance from 'api'
+import axios from 'axios'
 import { loginByGoogle } from 'redux/reducers/user/user.actions'
 
 const UserService = {
@@ -13,8 +14,8 @@ const UserService = {
             const response = await axiosInstance.post('/user/authenticate/login', bodyPost)
 
             return response
-        } catch (err) {
-            const { errorMessage } = err.response.data
+        } catch (error) {
+            const { errorMessage } = error.response.data
             throw errorMessage
         }
     },
@@ -25,13 +26,11 @@ const UserService = {
                 name,
                 userID
             }
-
             const response = await axiosInstance.post('/user/authenticate/facebook-login', bodyPost)
-            console.log('login by facebook')
 
             return response
         } catch (error) {
-            const { errorMessage } = error.reponse.data
+            const { errorMessage } = error.response.data
             throw errorMessage
         }
     },
@@ -47,8 +46,11 @@ const UserService = {
             console.log('error: ', error)
         }
     },
-    logout: () => {
+    async logout() {
+        const refreshToken = localStorage.getItem('refreshToken')
+        await axiosInstance.post('/user/authenticate/logout', { refreshToken })
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
     }
 }
 

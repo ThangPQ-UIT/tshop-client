@@ -14,27 +14,26 @@ const login = (values) => async (dispatch) => {
         })
 
         const response = await userService.login(values)
-        const { token, name } = response.data
-        localStorage.setItem('accessToken', token)
+        const { accessToken, refreshToken, name } = response.data
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
 
         dispatch({
             type: actionTypes.LOG_IN_SUCCESS,
             payload: name
         })
 
-        history.push('/')
-
+        history.goBack()
     } catch (error) {
         console.log('error login: ', error)
         dispatch({
             type: actionTypes.LOG_IN_FAILURE,
-            payload: error
         })
+
         const action = {
             type: 'error',
             message: error,
         }
-
         dispatch(addToast(action))
     }
 }
@@ -42,16 +41,17 @@ const login = (values) => async (dispatch) => {
 const loginByFacebook = (values) => async (dispatch) => {
     try {
         const response = await userService.loginByFacebook(values)
-        const { success, token, name } = response.data
+        const { success, accessToken, refreshToken, name } = response.data
         if (success) {
-            localStorage.setItem('accessToken', token)
+            localStorage.setItem('accessToken', accessToken)
+            localStorage.setItem('refreshToken', refreshToken)
 
             dispatch({
                 type: actionTypes.LOG_IN_SUCCESS,
                 payload: name
             })
 
-            history.push('/')
+            history.goBack()
         }
         return
     } catch (error) {
@@ -72,15 +72,17 @@ const loginByFacebook = (values) => async (dispatch) => {
 const loginByGoogle = (tokenId) => async (dispatch) => {
     try {
         const response = await userService.loginByGoogle(tokenId)
-        const { success, token, name } = response.data
+        const { success, accessToken, refreshToken, name } = response.data
 
         if (success) {
-            localStorage.setItem('accessToken', token)
+            localStorage.setItem('accessToken', accessToken)
+            localStorage.setItem('refreshToken', refreshToken)
             dispatch({
                 type: actionTypes.LOG_IN_SUCCESS,
                 payload: name
             })
-            history.push('/')
+
+            history.goBack()
         }
         return
     } catch (error) {

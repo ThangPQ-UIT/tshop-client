@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useEffect } from 'react'
+import React from 'react'
 import * as Yup from 'yup'
 import { Container } from 'reactstrap'
 import GoogleLogin from 'react-google-login'
@@ -12,7 +12,9 @@ import ggIcon from 'assets/icons/google-brands.svg'
 import twIcon from 'assets/icons/twitter-brands.svg'
 import fbIcon from 'assets/icons/facebook-brands.svg'
 
+import actionTypes from 'redux/reducers/user/user.types'
 import { login as loginAction, loginByFacebook, loginByGoogle } from 'redux/reducers/user/user.actions'
+import { addToast } from 'redux/reducers/toasts/toast.actions'
 
 import './style.css'
 
@@ -49,7 +51,15 @@ const Login = () => {
     }
 
     const handleFailureResponseGoogle = (res) => {
-        console.log('response failure gg: ', res)
+        dispatch({
+            type: actionTypes.LOG_IN_FAILURE,
+        })
+
+        const action = {
+            type: 'error',
+            message: 'Login is cancelled',
+        }
+        dispatch(addToast(action))
     }
 
     return (

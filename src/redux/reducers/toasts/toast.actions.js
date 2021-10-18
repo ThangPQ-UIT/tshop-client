@@ -8,7 +8,6 @@ const hideToast = (id) => {
 }
 
 const addToast = (data) => {
-    console.log('data: ', data)
     return {
         type: actionType.ADD_TOAST,
         payload: data

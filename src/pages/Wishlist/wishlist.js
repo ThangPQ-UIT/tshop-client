@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Container, Row, Col } from 'reactstrap'
 
 const WishList = () => {
 
@@ -24,10 +25,14 @@ const WishList = () => {
     return (
         <>
             {isMounted && (
-                <div style={{
-                    height: height
+                <div className='main-content' style={{
+                    minHeight: `${height}px`
                 }}>
-                    <p>Wishlist</p>
+                    <Container>
+                        <h3 className='text-center py-5 font-weight-bold' style={{
+                            color: 'var(--main-color)'
+                        }}>Wishlist</h3>
+                    </Container>
                 </div>
             )}
 

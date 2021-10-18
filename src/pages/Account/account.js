@@ -1,19 +1,26 @@
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Col, Container, Row } from 'reactstrap'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import axios from 'axios'
 import * as Yup from 'yup'
+import { Col, Container, Row } from 'reactstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, Redirect } from 'react-router-dom'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 import axiosInstance from 'api'
 import { update } from 'redux/reducers/user/user.actions'
 import { addToast } from 'redux/reducers/toasts/toast.actions'
+import { logout as logOutAction } from 'redux/reducers/user/user.actions'
 
 const locationAPI = process.env.REACT_APP_LOCATION_API
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 const Account = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
+
+    const user = useSelector(state => state.user)
+    const isAuthenticated = user?.isAuthenticated
 
     const [height, setHeight] = useState(0)
     const [isLoaded, setIsLoaded] = useState(false)
@@ -52,29 +59,34 @@ const Account = () => {
 
     const getData = async () => {
         try {
-            const token = await localStorage.getItem('accessToken')
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            }
-            const response = await axiosInstance.get('/user', config)
+            const response = await axiosInstance.get('/user')
             const { data } = response
 
             return data
         } catch (error) {
-            console.log('error: ', error)
+            const { status } = error.response
+            if (status === 403) {
+                dispatch(logOutAction())
+                history.push('/login')
+            }
         }
     }
 
     const setData = async () => {
         try {
-            // const data = await getData()
-            // const locations = await axiosInstance.get(locationAPI)
-            const data = await Promise.all([getData(), axiosInstance.get(locationAPI)])
+            const data = await Promise.all([getData(), axios.get(locationAPI)])
             const userData = data[0]
             const locations = data[1]
 
-            const { name, phoneNumber, email, address } = userData
-            const { city, district, ward, street } = address
+            const name = userData?.name
+            const email = userData?.email
+            const address = userData?.address
+            const phoneNumber = userData?.phoneNumber
+
+            const city = address?.city
+            const ward = address?.ward
+            const street = address?.street
+            const district = address?.district
 
             // update values to location options, based on data from the server
             if (city) {
@@ -107,7 +119,7 @@ const Account = () => {
 
     const handleLocationData = async () => {
         try {
-            const response = await axiosInstance.get(locationAPI)
+            const response = await axios.get(locationAPI)
             const { data } = response
             setLocationData(data)
 
@@ -150,152 +162,153 @@ const Account = () => {
         }
     }
 
-    // console.log('locationDataaaaa: ', locationData)
-
     return (
-        <div className='main-content' style={{
-            minHeight: `${height}px`,
-        }}>
-            <Container>
-                <Row>
-                    <Col lg={{ size: '6', offset: '3' }}>
-                        {isLoaded && <div className='my-4 border px-5 py-3'>
-                            <h3 className='text-center font-weight-bold' style={{
-                                color: 'var(--main-color)'
-                            }}>Contact information</h3>
-                            <Formik
-                                initialValues={{
-                                    name: formData.name,
-                                    email: formData.email,
-                                    phoneNumber: formData.phoneNumber,
-                                    city: formData.city,
-                                    district: formData.district,
-                                    ward: formData.ward,
-                                    street: formData.street
-                                }}
-                                validationSchema={Yup.object({
-                                    email: Yup.string().email('Invalid email').required('Required'),
-                                    phoneNumber: Yup.string().matches(phoneRegExp, 'Invalid phone number').required('Required')
-                                })}
-                                onSubmit={handleSubmit}
-                            >
-                                {({
-                                    values,
-                                    isSubmitting,
-                                    handleChange
-                                }) => {
+        <>
+            {isAuthenticated ? (
+                <div className='main-content' style={{
+                    minHeight: `${height}px`,
+                }}>
+                    <Container>
+                        <Row>
+                            <Col lg={{ size: '6', offset: '3' }}>
+                                {isLoaded && <div className='my-4 border px-5 py-3'>
+                                    <h3 className='text-center font-weight-bold' style={{
+                                        color: 'var(--main-color)'
+                                    }}>Contact information</h3>
+                                    <Formik
+                                        initialValues={{
+                                            name: formData.name,
+                                            email: formData.email,
+                                            phoneNumber: formData.phoneNumber,
+                                            city: formData.city,
+                                            district: formData.district,
+                                            ward: formData.ward,
+                                            street: formData.street
+                                        }}
+                                        validationSchema={Yup.object({
+                                            email: Yup.string().email('Invalid email').required('Required'),
+                                            phoneNumber: Yup.string().matches(phoneRegExp, 'Invalid phone number').required('Required')
+                                        })}
+                                        onSubmit={handleSubmit}
+                                    >
+                                        {({
+                                            values,
+                                            isSubmitting,
+                                            handleChange
+                                        }) => {
 
-                                    return (
-                                        <Form>
-                                            <label className='d-block small' htmlFor='name'>Name</label>
-                                            <Field
-                                                id='name'
-                                                type='text' name='name'
-                                                className='w-100 rounded py-1 px-2 bg-white'
-                                                value={values.name}
-                                                onChange={handleChange}
-                                            />
-                                            <ErrorMessage name='name' />
+                                            return (
+                                                <Form>
+                                                    <label className='d-block small' htmlFor='name'>Name</label>
+                                                    <Field
+                                                        id='name'
+                                                        type='text' name='name'
+                                                        className='w-100 rounded py-1 px-2 bg-white'
+                                                        value={values.name}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <ErrorMessage name='name' />
 
-                                            <label className='d-block mt-3 small' htmlFor='email'>Email</label>
-                                            <Field
-                                                id='email'
-                                                type='email'
-                                                name='email'
-                                                disabled={true} className='w-100 rounded py-1 px-2 bg-white'
-                                                value={values.email}
-                                                onChange={handleChange} />
-                                            <ErrorMessage name='email' />
+                                                    <label className='d-block mt-3 small' htmlFor='email'>Email</label>
+                                                    <Field
+                                                        id='email'
+                                                        type='email'
+                                                        name='email'
+                                                        disabled={true} className='w-100 rounded py-1 px-2 bg-white'
+                                                        value={values.email}
+                                                        onChange={handleChange} />
+                                                    <ErrorMessage name='email' />
 
-                                            <label className='d-block mt-3 small' htmlFor='phoneNumber'>Phone number</label>
-                                            <Field
-                                                id='phoneNumber'
-                                                type='tel'
-                                                name='phoneNumber' min='9'
-                                                className='w-100 rounded py-1 px-2'
-                                                value={values.phoneNumber}
-                                                onChange={handleChange} />
-                                            <ErrorMessage name='phoneNumber' />
+                                                    <label className='d-block mt-3 small' htmlFor='phoneNumber'>Phone number</label>
+                                                    <Field
+                                                        id='phoneNumber'
+                                                        type='tel'
+                                                        name='phoneNumber' min='9'
+                                                        className='w-100 rounded py-1 px-2'
+                                                        value={values.phoneNumber}
+                                                        onChange={handleChange} />
+                                                    <ErrorMessage name='phoneNumber' />
 
-                                            <label className='d-block mt-3 small' htmlFor='city'>City</label>
-                                            <Field
-                                                name='city'
-                                                as='select'
-                                                className='w-100 rounded p-2'
-                                                value={values.city}
-                                                onChange={(event) => {
-                                                    customHandleChange(event)
-                                                    handleChange(event)
-                                                }}
-                                            >
-                                                <option>Select city</option>
-                                                {locationData && locationData.map(location => {
-                                                    return (
-                                                        <option key={location.code}>{location.name}</option>
-                                                    )
-                                                })}
-                                            </Field>
+                                                    <label className='d-block mt-3 small' htmlFor='city'>City</label>
+                                                    <Field
+                                                        name='city'
+                                                        as='select'
+                                                        className='w-100 rounded p-2'
+                                                        value={values.city}
+                                                        onChange={(event) => {
+                                                            customHandleChange(event)
+                                                            handleChange(event)
+                                                        }}
+                                                    >
+                                                        <option>Select city</option>
+                                                        {locationData && locationData.map(location => {
+                                                            return (
+                                                                <option key={location.code}>{location.name}</option>
+                                                            )
+                                                        })}
+                                                    </Field>
 
-                                            <label className='d-block mt-3 small' htmlFor='district'>District</label>
-                                            <Field
-                                                name='district'
-                                                as='select'
-                                                className='w-100 rounded p-2'
-                                                value={values.district}
-                                                onChange={(event) => {
-                                                    customHandleChange(event)
-                                                    handleChange(event)
-                                                }}
-                                            >
-                                                <option>Select district</option>
-                                                {districtList && districtList.map(district => {
-                                                    return (
-                                                        <option key={district.code}>{district.name}</option>
-                                                    )
-                                                })}
-                                            </Field>
+                                                    <label className='d-block mt-3 small' htmlFor='district'>District</label>
+                                                    <Field
+                                                        name='district'
+                                                        as='select'
+                                                        className='w-100 rounded p-2'
+                                                        value={values.district}
+                                                        onChange={(event) => {
+                                                            customHandleChange(event)
+                                                            handleChange(event)
+                                                        }}
+                                                    >
+                                                        <option>Select district</option>
+                                                        {districtList && districtList.map(district => {
+                                                            return (
+                                                                <option key={district.code}>{district.name}</option>
+                                                            )
+                                                        })}
+                                                    </Field>
 
-                                            <label className='d-block mt-3 small' htmlFor='ward'>Ward</label>
-                                            <Field
-                                                name='ward'
-                                                as='select'
-                                                className='w-100 rounded p-2'
-                                                value={values.ward}
-                                                onChange={handleChange}
-                                            >
-                                                <option>Select ward</option>
-                                                {wardList && wardList.map(ward => {
-                                                    return <option key={ward.code}> {ward.name}</option>
-                                                })}
-                                            </Field>
+                                                    <label className='d-block mt-3 small' htmlFor='ward'>Ward</label>
+                                                    <Field
+                                                        name='ward'
+                                                        as='select'
+                                                        className='w-100 rounded p-2'
+                                                        value={values.ward}
+                                                        onChange={handleChange}
+                                                    >
+                                                        <option>Select ward</option>
+                                                        {wardList && wardList.map(ward => {
+                                                            return <option key={ward.code}> {ward.name}</option>
+                                                        })}
+                                                    </Field>
 
-                                            <label className='d-block mt-3 small' htmlFor='street'>Street</label>
-                                            <Field
-                                                id='street'
-                                                type='text'
-                                                name='street'
-                                                className='w-100 rounded py-1 px-2'
-                                                value={values.street}
-                                                onChange={handleChange} />
+                                                    <label className='d-block mt-3 small' htmlFor='street'>Street</label>
+                                                    <Field
+                                                        id='street'
+                                                        type='text'
+                                                        name='street'
+                                                        className='w-100 rounded py-1 px-2'
+                                                        value={values.street}
+                                                        onChange={handleChange} />
 
-                                            <button
-                                                type='submit'
-                                                className='mt-3 rounded py-2 px-4 border-0 text-light'
-                                                disabled={isSubmitting}
-                                                style={{
-                                                    backgroundColor: 'var(--main-color)',
-                                                }}>
-                                                Update
-                                            </button>
-                                        </Form>
-                                    )
-                                }}
-                            </Formik>
-                        </div>}
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+                                                    <button
+                                                        type='submit'
+                                                        className='mt-3 rounded py-2 px-4 border-0 text-light'
+                                                        disabled={isSubmitting}
+                                                        style={{
+                                                            backgroundColor: 'var(--main-color)',
+                                                        }}>
+                                                        Update
+                                                    </button>
+                                                </Form>
+                                            )
+                                        }}
+                                    </Formik>
+                                </div>}
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>) : <Redirect to='/login' />}
+        </>
     )
 }
 
