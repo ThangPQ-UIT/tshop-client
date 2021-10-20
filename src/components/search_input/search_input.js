@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import './style.css'
 
-const SearchInput = ({ isOpen, searchValue, handleOnChange, toggleSearchInput, ref }) => {
+const Input = ({ isOpen, searchValue, handleOnChange, toggleSearchInput }, ref) => {
     return (
         <div
             className={isOpen ? 'search-ip-container rounded h-100 open' : 'search-ip-container rounded h-100'}
@@ -21,5 +21,7 @@ const SearchInput = ({ isOpen, searchValue, handleOnChange, toggleSearchInput, r
         </div>
     )
 }
+
+const SearchInput = forwardRef(Input)
 
 export default SearchInput

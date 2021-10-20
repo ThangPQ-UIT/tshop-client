@@ -86,25 +86,32 @@ const Blog = () => {
                 }}>
                     <u>Blog</u>
                 </h3>
-                <div className='mb-5 blog__search-container'>
-                    <SearchInput
-                        isOpen={isOpen}
-                        searchValue={searchValue}
-                        handleOnChange={handleSearchChange}
-                        toggleSearchInput={toggleSearchInput}
-                        ref={searchInputRef}
+                <Row className='mb-5'>
+                    <div className='d-flex'>
+                        <div className='blog__search-container mr-3'>
+                            <SearchInput
+                                isOpen={isOpen}
+                                searchValue={searchValue}
+                                handleOnChange={handleSearchChange}
+                                toggleSearchInput={toggleSearchInput}
+                                ref={searchInputRef}
 
-                    />
-                </div>
-                <Row>
-                    <Col lg='8'>
+                            />
+                        </div>
+                        <div className='blog__filter-category-select d-lg-none'>
+                            <Select handleOnChange={handleCategoryChange} filterValue={filterValue} optionList={categoryOptionList} />
+                        </div>
+                    </div>
+                </Row>
+                <Row className='mb-4'>
+                    <Col lg='8' md='12'>
                         {(isLoaded && blogList) ? (
                             <Row>
                                 {blogList.map(blog => {
 
                                     return (
                                         <React.Fragment key={blog._id}>
-                                            <Col lg='6' className='mb-4'>
+                                            <Col sm='6' className='mb-4'>
                                                 <div className='d-flex flex-column' style={{
                                                     borderRadius: '25px',
                                                     overflow: 'hidden',
@@ -141,7 +148,7 @@ const Blog = () => {
                         ) : (<Loading />)}
                     </Col>
                     <Col lg='4'>
-                        <div className='blog__filter-category-select'>
+                        <div className='blog__filter-category-select d-none d-lg-block'>
                             <Select handleOnChange={handleCategoryChange} filterValue={filterValue} optionList={categoryOptionList} />
                         </div>
                     </Col>

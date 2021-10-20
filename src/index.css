@@ -12,6 +12,7 @@ body {
   --main-color: #938553;
   --main-lighter-color: #93855345;
   --main-bg: #F3F3EE;
+  --transition: all .5s ease;
 }
 
 .container {

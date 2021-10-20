@@ -111,7 +111,7 @@ const Shop = () => {
                 }}>
                     <u>Shop</u>
                 </h3>
-                <Row className='py-4'>
+                <Row className='pb-4'>
                     <div className='shop__category-filter-search-container'>
                         {/* search */}
                         <div className='shop__search-container'>
