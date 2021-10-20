@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Container, Row, Col } from 'reactstrap'
 
+import Loading from 'components/loading/loading'
+import CartItem from './Cart_Components/CartItem/cart_item'
+
 import emptyCartIcon from 'assets/icons/empty-cart.svg'
 
 import axiosInstance from 'api'
 import './style.css'
-import CartItem from './Cart_Components/CartItem/cart_item'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 
 const Cart = () => {
 
@@ -15,6 +18,7 @@ const Cart = () => {
     const [height, setHeight] = useState()
     const [cartData, setCartData] = useState([])
     const [countItem, setCountItem] = useState(0)
+    const [isLoaded, setIsloaded] = useState(false)
 
     const cart = useSelector(state => state.cart)
     const idList = cart.map(item => item.id)
@@ -31,47 +35,42 @@ const Cart = () => {
     }
 
     const handleSetData = async () => {
-        const productList = await handleGetData()
+        try {
+            const productList = await handleGetData()
 
-        // get the price and image data from database 
-        // then concaternate to the cart array (currently just have id, color, price, and quantity)
-        const fullInforItemList = cart.map(cartItem => {
-            const product = productList.find(product => {
-                return product._id === cartItem.id
+            // get the price and image data from database 
+            // then concaternate to the cart array (currently just have id, color, price, and quantity)
+            const fullInforItemList = cart.map(cartItem => {
+                const product = productList.find(product => {
+                    return product._id === cartItem.id
+                })
+
+                const image = product.color.find(productItem => {
+                    return productItem.color === cartItem.color
+                })
+
+                const newItem = {
+                    ...cartItem,
+                    image: image.imageUrlList[0],
+                    price: product.price,
+                    name: product.name
+                }
+
+                return newItem
             })
 
-            const image = product.color.find(productItem => {
-                return productItem.color === cartItem.color
-            })
-
-            const newItem = {
-                ...cartItem,
-                image: image.imageUrlList[0],
-                price: product.price,
-                name: product.name
-            }
-
-            return newItem
-        })
-
-        handleSetCoutOfItem(fullInforItemList)
-        handleSetSumOfPrice(fullInforItemList)
-        setCartData(fullInforItemList)
+            handleSetCoutOfItem(fullInforItemList)
+            handleSetSumOfPrice(fullInforItemList)
+            setCartData(fullInforItemList)
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setIsloaded(true)
+        }
     }
 
     useEffect(() => {
-        // Set height for component
-        window.scrollTo(0, 0)
-        const header = document.getElementById('header')
-        const footer = document.getElementById('footer')
-
-        const headerHeight = header.offsetHeight
-        const footerHeight = footer.offsetHeight
-        const screenHeight = window.innerHeight
-
-        const cartHeight = screenHeight - headerHeight - footerHeight
-        setHeight(cartHeight)
-
+        setHeightMainContent(setHeight)
         handleSetData()
     }, [cart])
 
@@ -96,17 +95,19 @@ const Cart = () => {
     }
 
     return (
-        <div className='py-5 main-content' style={{
+        <div className='main-content' style={{
             minHeight: `${height}px`
         }}>
             <Container>
-                <h3 className='text-center font-weight-bold mb-5' style={{
+                <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
                     color: 'var(--main-color)'
-                }}>Shopping cart</h3>
+                }}>
+                    <u>Shopping cart</u>
+                </h3>
                 {idList.length ? (
                     <Row>
                         <Col lg='7' className='border-right pr-3'>
-                            {cartData.map(item => {
+                            {isLoaded ? cartData.map(item => {
                                 return (
                                     <CartItem
                                         key={item.id + item.color + item.size}
@@ -119,7 +120,7 @@ const Cart = () => {
                                         quantity={item.quantity}
                                     />
                                 )
-                            })}
+                            }) : (<Loading />)}
                         </Col>
                         <Col lg='5'>
                             <div

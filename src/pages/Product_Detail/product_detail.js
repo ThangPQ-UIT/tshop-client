@@ -4,12 +4,14 @@ import { useParams, useLocation } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
 import Slider from 'components/slider/slider'
+import Loading from 'components/loading/loading'
 
 import cartAction from 'redux/reducers/cart/cart.actions'
 
 import axiosInstance from 'api'
 
 import './style.css'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 import cartNotificationAction from 'redux/reducers/cartNotification/cartNotification.actions'
 
 const ProductDetail = () => {
@@ -36,19 +38,8 @@ const ProductDetail = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        // Set height for component
-        const header = document.getElementById('header')
-        const footer = document.getElementById('footer')
-
-        const headerHeight = header.offsetHeight
-        const footerHeight = footer.offsetHeight
-        const screenHeight = window.innerHeight
-
-        const cartHeight = screenHeight - headerHeight - footerHeight
-
-        setHeight(cartHeight)
+        setHeightMainContent(setHeight)
         setData()
-
     }, [location])
 
     const addToCart = () => {
@@ -127,140 +118,137 @@ const ProductDetail = () => {
             backgroundColor: '#fff'
         }}>
             <Container>
-                {
-                    isLoaded ? (
-                        <Row className='py-5 border'>
-                            <Col lg='7' className=''>
-                                <div className='d-flex'>
-                                    <div className='w-25 d-flex flex-column'>
-                                        {
-                                            productData.length !== 0 && productData.color[colorIndex].imageUrlList.map((item, index) => {
-                                                let additionalClassName = ''
-                                                if (index !== imageIndex) {
-                                                    additionalClassName = 'overlay'
-                                                }
-                                                return (
-                                                    <img
-                                                        src={item}
-                                                        key={index}
-                                                        height='60px'
-                                                        width='50px'
-                                                        className={`mb-4 mx-auto ${additionalClassName}`}
-                                                        onMouseEnter={() => handleSelectImage(index)}
-                                                    />
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                    <div className='w-75'>
-                                        <img src={productData.color[colorIndex].imageUrlList[imageIndex]}
-                                            height='100%'
-                                            width='100%'
-                                        />
-                                    </div>
-                                </div>
-                            </Col>
-                            <Col lg='5'>
-                                <div className='border rounded p-5'>
-                                    <p className='bolder'>{productData.name}</p>
-                                    <p>${productData.price}</p>
-                                    <div className='py-3' style={{
-                                        borderTop: '3px dotted'
-                                    }}>
-                                        <span className='d-inline-block mb-2'>Size</span><br></br>
-                                        {
-                                            productData.size.map((item, index) => {
-                                                let active = false
-                                                if (item === size) {
-                                                    active = true
-                                                }
-                                                return (
-                                                    <button
-                                                        key={index}
-                                                        value={item}
-                                                        className='mr-3 py-2'
-                                                        style={{
-                                                            width: '50px',
-                                                            boxSizing: 'border-box',
-                                                            color: active ? '#fff' : null,
-                                                            border: active ? '1px solid var(--main-color)' : '1px solid #000',
-                                                            backgroundColor: active ? 'var(--main-color)' : 'transparent',
-                                                        }}
-                                                        onClick={handleSelectSize}
-                                                    >
-                                                        {item}
-                                                    </button>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                    <div>
-                                        <span className='d-inline-block mb-2'>Color</span><br />
-                                        {
-                                            productData.color.map((item, index) => {
-                                                let borderTemp = 'none'
-                                                if (index === colorIndex) {
-                                                    borderTemp = '2px solid red'
-                                                }
-                                                return (
-                                                    <div key={index} style={{
-                                                        display: 'inline',
-                                                        margin: '0px 20px 0px 0px',
-                                                        borderBottom: borderTemp,
-                                                    }}>
-                                                        <button
-                                                            style={{
-                                                                display: 'inline-flex',
-                                                                border: 'none',
-                                                                justifyContent: 'center',
-                                                                alignItems: 'center',
-                                                                width: '20px',
-                                                                height: '20px',
-                                                                borderRadius: '50%',
-                                                                backgroundColor: item.color,
-                                                            }}
-                                                            onClick={() => handleSelectColor(index)}
-                                                        ></button>
-                                                    </div>
-
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                    <div className='d-flex justify-content-between'>
-                                        <div>
-                                            <span className='d-inline-block my-2'>Quantity</span><br></br>
-                                            <input type='number' className='product__count' value={quantity} onChange={handleSelectQuantity} />
+                <Row className='py-5 product-detail-container'>
+                    {
+                        isLoaded ? (
+                            <>
+                                <Col lg='7' className='product-detail__images'>
+                                    <div className='d-flex'>
+                                        <div className='w-25 d-flex flex-column'>
+                                            {
+                                                productData.length !== 0 && productData.color[colorIndex].imageUrlList.map((item, index) => {
+                                                    let additionalClassName = ''
+                                                    if (index !== imageIndex) {
+                                                        additionalClassName = 'overlay'
+                                                    }
+                                                    return (
+                                                        <img
+                                                            src={item}
+                                                            key={index}
+                                                            height='60px'
+                                                            width='50px'
+                                                            className={`mb-4 mx-auto ${additionalClassName}`}
+                                                            onMouseEnter={() => handleSelectImage(index)}
+                                                        />
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className='w-75'>
+                                            <img src={productData.color[colorIndex].imageUrlList[imageIndex]}
+                                                height='100%'
+                                                width='100%'
+                                            />
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={addToCart}
-                                        className='border-0 px-3 py-2 w-100 mt-3 text-light font-weight-bold'
-                                        style={{
-                                            backgroundColor: size ? 'var(--main-color)' : 'var(--main-lighter-color)',
-                                        }}
-                                        disabled={size ? false : true}
-                                    >
-                                        Add to cart
-                                    </button>
-                                    <div className='mt-3'>
-                                        <p>{productData.description}</p>
+                                </Col>
+                                <Col lg='5'>
+                                    <div className='border rounded p-5'>
+                                        <p className='bolder'>{productData.name}</p>
+                                        <p>${productData.price}</p>
+                                        <div className='py-3' style={{
+                                            borderTop: '3px dotted'
+                                        }}>
+                                            <span className='d-inline-block mb-2'>Size</span><br></br>
+                                            {
+                                                productData.size.map((item, index) => {
+                                                    let active = false
+                                                    if (item === size) {
+                                                        active = true
+                                                    }
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            value={item}
+                                                            className='mr-3 py-2'
+                                                            style={{
+                                                                width: '50px',
+                                                                boxSizing: 'border-box',
+                                                                color: active ? '#fff' : null,
+                                                                border: active ? '1px solid var(--main-color)' : '1px solid #000',
+                                                                backgroundColor: active ? 'var(--main-color)' : 'transparent',
+                                                            }}
+                                                            onClick={handleSelectSize}
+                                                        >
+                                                            {item}
+                                                        </button>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div>
+                                            <span className='d-inline-block mb-2'>Color</span><br />
+                                            {
+                                                productData.color.map((item, index) => {
+                                                    let borderTemp = 'none'
+                                                    if (index === colorIndex) {
+                                                        borderTemp = '2px solid red'
+                                                    }
+                                                    return (
+                                                        <div key={index} style={{
+                                                            display: 'inline',
+                                                            margin: '0px 20px 0px 0px',
+                                                            borderBottom: borderTemp,
+                                                        }}>
+                                                            <button
+                                                                style={{
+                                                                    display: 'inline-flex',
+                                                                    border: 'none',
+                                                                    justifyContent: 'center',
+                                                                    alignItems: 'center',
+                                                                    width: '20px',
+                                                                    height: '20px',
+                                                                    borderRadius: '50%',
+                                                                    backgroundColor: item.color,
+                                                                }}
+                                                                onClick={() => handleSelectColor(index)}
+                                                            ></button>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        <div className='d-flex justify-content-between'>
+                                            <div>
+                                                <span className='d-inline-block my-2'>Quantity</span><br></br>
+                                                <input type='number' className='product__count' value={quantity} onChange={handleSelectQuantity} />
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={addToCart}
+                                            className='border-0 px-3 py-2 w-100 mt-3 text-light font-weight-bold'
+                                            style={{
+                                                backgroundColor: size ? 'var(--main-color)' : 'var(--main-lighter-color)',
+                                            }}
+                                            disabled={size ? false : true}
+                                        >
+                                            Add to cart
+                                        </button>
+                                        <div className='mt-3'>
+                                            <p>{productData.description}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    ) : (
-                        <div>
-                            <div>
-                                <p>loading...</p>
-                            </div>
-                        </div>
-                    )
-                }
+                                </Col>
+                            </>
+                        ) : (
+                            <Loading />
+                        )
+                    }
+                </Row>
                 {
                     relatedProductList && (
                         <Row className='pb-5'>
-                            <p className='text-center display-6 mb-5'>Related Products</p>
+                            <h4 className='text-center mb-4'>Related Products</h4>
                             <div className='p-3 home__product-slider'>
                                 <Slider data={relatedProductList} />
                             </div>

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import greaterIcon from 'assets/icons/greater.png'
 import lessIcon from 'assets/icons/less.png'
 
-import { data } from './slideData'
 import SlideItem from './components/slide_item/slide_item'
 
 import './style.css'

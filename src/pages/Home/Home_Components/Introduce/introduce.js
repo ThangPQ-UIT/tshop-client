@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 
 import { Container, Row, Col } from 'reactstrap'
 
@@ -9,7 +9,7 @@ import FeatureBlock from 'components/feature_block/feature_block'
 import tshirtIcon from 'assets/icons/tshirt.svg'
 import shipIcon from 'assets/icons/ship.svg'
 import paymentIcon from 'assets/icons/payment.svg'
-import leatherImg from 'assets/images/leather.png'
+// import leatherImg from 'assets/images/leather.png'
 
 
 const Introduce = () => {
@@ -50,7 +50,7 @@ const Introduce = () => {
                                                 <Col lg=''>
                                                     <li className='list-unstyled'>
                                                         Supra Unero
-                                        </li>
+                                                    </li>
                                                 </Col>
                                             </Row>
                                         </Col>
@@ -81,33 +81,33 @@ const Introduce = () => {
                                         description='100% polyurethene & 100% polyester, product of Durotan alway choose 
                                         detail and safety with customer.You satisfication is our reputation'
                                     />
-                                    <FeatureBlock 
-                                        iconImg={shipIcon} 
+                                    <FeatureBlock
+                                        iconImg={shipIcon}
                                         name='FREE SHIPPING'
                                         description='Durotan free shipping for all orders over $199 in domestic & over 
                                         $399 for worldwide Durotan free shipping for all orders over $199 in domestic & over '
                                     />
-                                    <FeatureBlock 
-                                        iconImg={paymentIcon} 
+                                    <FeatureBlock
+                                        iconImg={paymentIcon}
                                         name='SECURE PAYMENT'
                                         description='We guarantee 100% secure with online payment on our site.
                                         In case if you have any problems with our product, you can return it back in 30 days'
                                     />
                                 </Col>
-                                <Col lg='7' md='0' className='border d-lg-block d-none'>
+                                {/* <Col lg='7' md='0' className='border d-lg-block d-none'>
                                     <img src={leatherImg} style={{
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'fill'
                                     }} />
-                                </Col>
+                                </Col> */}
                             </Row>
                         </Container>
                     </div>
                 </div>
             </div>
         </div>
-    ) 
-} 
+    )
+}
 
-export default Introduce 
+export default Introduce

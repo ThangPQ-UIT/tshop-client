@@ -3,61 +3,48 @@ import ReactPaginate from 'react-paginate'
 import { Container, Row, Col } from 'reactstrap'
 
 import Item from './Item_Component/item'
+import Select from 'components/select/select'
+import Loading from 'components/loading/loading'
+import SearchInput from 'components/search_input/search_input'
 
-import { categoriesOptionList } from './shop.data'
-
-import filterIcon from 'assets/icons/filter.svg'
-import searchIcon from 'assets/icons/search_main_color.svg'
-import downToUpIcon from 'assets/icons/sort-amount-up-alt-solid.svg'
-import upToDownIcon from 'assets/icons/sort-amount-down-alt-solid.svg'
+import { priceOptionList, categoriesOptionList } from './shop.data'
 
 import './style.css'
 import axiosInstance from 'api'
-import { NavLink } from 'react-router-dom'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 
 const Shop = () => {
 
-    const filterRef = useRef(null)
-    const searchRef = useRef(null)
+    const searchInputRef = useRef(null)
 
     const [height, setHeight] = useState()
+    const [isOpen, setIsOpen] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false)
     const [countOfItem, setCountOfItem] = useState()
     const [currentPage, setCurrentPage] = useState(1)
-    const [productList, setProductList] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const [filterByPrice, setFilterByPrice] = useState('')
-    const [isShowFilter, setIsShowFilter] = useState(false)
+    const [productList, setProductList] = useState([])
+    const [filterByPrice, setFilterByPrice] = useState('price')
+    const [filterByCategory, setFilterByCategory] = useState('categories')
 
     useEffect(() => {
-        // Set height for component
-        const header = document.getElementById('header')
-        const footer = document.getElementById('footer')
-
-        const headerHeight = header.offsetHeight
-        const footerHeight = footer.offsetHeight
-        const screenHeight = window.innerHeight
-
-        const cartHeight = screenHeight - headerHeight - footerHeight
-        setHeight(cartHeight)
+        setHeightMainContent(setHeight)
     }, [])
 
     useEffect(() => {
-        document.addEventListener('mousedown', hanldeClickOutSide)
         setData()
         window.scrollTo(0, 0)
-        return () => {
-            document.removeEventListener('mousedown', handleShowFilter)
-        }
-    }, [filterByPrice, currentPage])
+    }, [filterByPrice, currentPage, filterByCategory])
 
-    const getData = async (searchData) => {
+    const getData = async (searchValue) => {
         try {
-            if (!searchData) {
-                searchData = ''
+            setIsLoaded(false)
+            if (!searchValue) {
+                searchValue = ''
             }
 
-            const response = await axiosInstance.get(`/products?limit=${8}&&current_page=${currentPage}&&name=${searchData}&price_type=${filterByPrice}`)
+            const response = await axiosInstance.get(`/products?limit=${8}&current_page=${currentPage}&name=${searchValue}&price_type=${filterByPrice}&category=${filterByCategory}`
+            )
             const data = response.data
 
             return data
@@ -80,134 +67,77 @@ const Shop = () => {
         }
     }
 
-    const hanldeClickOutSide = (event) => {
-        if (filterRef.current && !filterRef.current.contains(event.target)) {
-            setIsShowFilter(false)
-        }
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected + 1)
     }
 
-    const handleShowFilter = () => {
-        setIsShowFilter(!isShowFilter)
-    }
-
-    const handleFilterByPrice = (filterType) => {
-        setFilterByPrice(filterType)
-        handleShowFilter()
+    const toggleSearchInput = () => {
+        setIsOpen(!isOpen)
     }
 
     const handleSearchChange = (event) => {
         const { value } = event.target
         setSearchValue(value)
-        if (searchRef.current) {
-            clearTimeout(searchRef.current)
+
+        if (searchInputRef.current) {
+            clearTimeout(searchInputRef.current)
         }
-        searchRef.current = setTimeout(() => {
-            console.log('searchValue in setTimeout: ', searchValue)
+        searchInputRef.current = setTimeout(() => {
             setData(value)
         }, 300)
     }
 
-    const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected + 1)
+    const handlePriceChange = (event) => {
+        const { value } = event.target
+        setFilterByPrice(value)
+        return
     }
 
-    console.log('reRender')
+    const handleCategoryChange = (event) => {
+        const { value } = event.target
+        setSearchValue('')
+        setFilterByCategory(value)
+        return
+    }
 
     return (
         <div className='main-content' style={{
             minHeight: `${height}px`,
-            backgroundColor: 'var(--main-bg)'
+            backgroundColor: 'var(--main-bg)',
         }}>
             <Container>
+                <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
+                    color: 'var(--main-color)'
+                }}>
+                    <u>Shop</u>
+                </h3>
                 <Row className='py-4'>
-                    <div className='d-flex justify-content-between'>
-                        <div className='h-100 d-flex align-items-center'>
-                            {
-                                categoriesOptionList.map(category => {
-                                    return (
-                                        <NavLink
-                                            key={category.id}
-                                            className='mr-5 border-0 bg-transparent'
-                                            to={category.to}
-                                            // className='header__nav-link text-decoration-none'
-                                            activeStyle={{
-                                                fontWeight: 'bold',
-                                                color: 'var(--main-color)'
-                                            }}
-                                        >
-                                            {category.name}
-                                        </NavLink>
-                                    )
-                                })
-                            }
-                        </div>
+                    <div className='shop__category-filter-search-container'>
+                        {/* search */}
+                        <div className='shop__search-container'>
+                            <SearchInput
+                                isOpen={isOpen}
+                                searchValue={searchValue}
+                                handleOnChange={handleSearchChange}
+                                toggleSearchInput={toggleSearchInput}
+                                ref={searchInputRef}
 
-                        <div className='d-flex justify-content-end'>
-                            {/* filter */}
-                            <div
-                                ref={filterRef}
-                                style={{
-                                    position: 'relative'
-                                }}
-                            >
-                                <button
-                                    className='rounded mr-4 bg-transparent'
-                                    style={{
-                                        border: '2px solid var(--main-color)'
-                                    }}
-                                    onClick={handleShowFilter}
-                                >
-                                    <img src={filterIcon} alt='filter icon' width='20px' height='20px' />
-                                    <span className='ml-2'>Filter</span>
-                                </button>
-                                {
-                                    isShowFilter && (
-                                        <div className='rounded' style={{
-                                            position: 'absolute',
-                                            top: '110%',
-                                            zIndex: '2',
-                                            border: '1px solid var(--main-color)',
-                                            backgroundColor: '#fff',
-                                            padding: '0px 10px',
-                                            cursor: 'pointer'
-                                        }}>
-                                            <p
-                                                className='border-bottom cursor-pointer my-2'
-                                                onClick={() => handleFilterByPrice('highToLow')}
-                                            >
-                                                price
-                                                <img src={upToDownIcon} alt='updown icon' height='30px' width='20px' />
-                                            </p>
-                                            <p
-                                                className='border-bottom'
-                                                onClick={() => handleFilterByPrice('lowToHigh')}
-                                            >
-                                                price
-                                                <img src={downToUpIcon} alt='downup icon' height='30px' width='20px' />
-                                            </p>
-                                        </div>
-                                    )
-                                }
+                            />
+                        </div>
+                        <div className='shop__filter-search-container'>
+                            {/* filter by price */}
+                            <div className='mr-4'>
+                                <Select handleOnChange={handlePriceChange} filterValue={filterByPrice} optionList={priceOptionList} />
                             </div>
-                            {/* search */}
-                            <div className='h-100 d-flex'>
-                                <div style={{
-                                    position: 'relative'
-                                }}>
-                                    <img src={searchIcon} alt='search icon' width='20px' height='20px' style={{
-                                        position: 'absolute',
-                                        right: '10px',
-                                        top: '50%',
-                                        transform: 'translateY(-50%)'
-                                    }} />
-                                    <input type='text' onChange={handleSearchChange} value={searchValue} />
-                                </div>
+                            {/* filter by category */}
+                            <div className='shop__filter-category-select'>
+                                <Select handleOnChange={handleCategoryChange} filterValue={filterByCategory} optionList={categoriesOptionList} />
                             </div>
                         </div>
                     </div>
                 </Row>
-                {isLoaded ?
-                    (<>
+                {isLoaded ? (
+                    <>
                         <Row className='py-4'>
                             {productList.map(item => {
 
@@ -243,9 +173,7 @@ const Shop = () => {
                                 </div>
                             </Col>
                         </Row>
-                    </>) : (
-                        <p>Loading...</p>
-                    )}
+                    </>) : (<Loading />)}
             </Container>
         </div>
     )

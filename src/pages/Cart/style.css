@@ -1,17 +1,3 @@
-.test {
-    border: 1px solid red;
-    padding: 10x 0px;
-}
-
-table tr {
-    padding: 10px 0px;
-    text-align: center;
-}
-
-table td {
-    border: 1px solid red;
-}
-
 .cart-no-item-container {
     padding: 90px 0px;
 }

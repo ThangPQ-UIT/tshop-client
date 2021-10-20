@@ -1,0 +1,5 @@
+.select-component {
+    padding: 0px 15px 0px 5px;
+    color: var(--main-color);
+    outline: none;
+}

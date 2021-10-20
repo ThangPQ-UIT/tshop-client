@@ -12,6 +12,8 @@ import { update } from 'redux/reducers/user/user.actions'
 import { addToast } from 'redux/reducers/toasts/toast.actions'
 import { logout as logOutAction } from 'redux/reducers/user/user.actions'
 
+import setHeightMainContent from 'utilities/setHeightMainContent'
+
 const locationAPI = process.env.REACT_APP_LOCATION_API
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
@@ -39,17 +41,7 @@ const Account = () => {
     const [districtList, setDistrictList] = useState()
 
     useEffect(() => {
-        // Set height for component
-        window.scrollTo(0, 0)
-        const header = document.getElementById('header')
-        const footer = document.getElementById('footer')
-
-        const headerHeight = header.offsetHeight
-        const footerHeight = footer.offsetHeight
-        const screenHeight = window.innerHeight
-
-        const cartHeight = screenHeight - headerHeight - footerHeight
-        setHeight(cartHeight)
+        setHeightMainContent(setHeight)
     }, [])
 
     useEffect(() => {
@@ -172,9 +164,11 @@ const Account = () => {
                         <Row>
                             <Col lg={{ size: '6', offset: '3' }}>
                                 {isLoaded && <div className='my-4 border px-5 py-3'>
-                                    <h3 className='text-center font-weight-bold' style={{
+                                    <h3 className='text-center font-weight-bold mb-4' style={{
                                         color: 'var(--main-color)'
-                                    }}>Contact information</h3>
+                                    }}>
+                                        <u>Account information</u>
+                                    </h3>
                                     <Formik
                                         initialValues={{
                                             name: formData.name,

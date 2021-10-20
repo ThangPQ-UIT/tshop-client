@@ -2,20 +2,30 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
+import Select from 'components/select/select'
+import Loading from 'components/loading/loading'
+import SearchInput from 'components/search_input/search_input'
+
 import axiosInstance from 'api'
 
 import './style.css'
+import { categoryOptionList } from './blog.data'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 
 const Blog = () => {
 
     const searchInputRef = useRef(null)
 
+    const [height, setHeight] = useState()
     const [blogList, setBlogList] = useState()
     const [isOpen, setIsOpen] = useState(false)
-    const [searchData, setSearchData] = useState('')
-    const [filterValue, setFilterValue] = useState('all')
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [searchValue, setSearchValue] = useState('')
+    const [filterValue, setFilterValue] = useState('categories')
 
     const getData = async (searchValue) => {
+        setIsLoaded(false)
+
         if (!searchValue) {
             searchValue = ''
         }
@@ -26,10 +36,19 @@ const Blog = () => {
     }
 
     const setData = async (searchValue) => {
-        console.log('set data')
-        const data = await getData(searchValue)
-        setBlogList(data)
+        try {
+            const data = await getData(searchValue)
+            setBlogList(data)
+        } catch (error) {
+            console.log('error: ', error)
+        } finally {
+            setIsLoaded(true)
+        }
     }
+
+    useEffect(() => {
+        setHeightMainContent(setHeight)
+    }, [])
 
     useEffect(() => {
         setData()
@@ -41,7 +60,7 @@ const Blog = () => {
 
     const handleSearchChange = (event) => {
         const { value } = event.target
-        setSearchData(value)
+        setSearchValue(value)
 
         if (searchInputRef.current) {
             clearTimeout(searchInputRef.current)
@@ -57,32 +76,29 @@ const Blog = () => {
     }
 
     return (
-        <div className='main-content py-5'>
+        <div className='main-content' style={{
+            minHeight: `${height}px`,
+            backgroundColor: 'var(--main-bg)'
+        }}>
             <Container>
-                <h3 className='text-center mb-5 font-weight-bold' style={{
+                <h3 className='text-center pt-4 pb-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
-                }}>Blog</h3>
-                <div
-                    className={isOpen ? 'blog__search-container rounded open' : 'blog__search-container rounded'}
-                    style={{
-                        marginBottom: '20px'
-                    }}
-                >
-                    <input
-                        type='search'
-                        value={searchData}
-                        className='blog__search-box bg-white rounded'
-                        placeholder='Search'
-                        onChange={handleSearchChange}
+                }}>
+                    <u>Blog</u>
+                </h3>
+                <div className='mb-5 blog__search-container'>
+                    <SearchInput
+                        isOpen={isOpen}
+                        searchValue={searchValue}
+                        handleOnChange={handleSearchChange}
+                        toggleSearchInput={toggleSearchInput}
                         ref={searchInputRef}
+
                     />
-                    <span className='blog__search-button' onClick={toggleSearchInput}>
-                        <span className='blog__search-icon'></span>
-                    </span>
                 </div>
                 <Row>
                     <Col lg='8'>
-                        {blogList ? (
+                        {(isLoaded && blogList) ? (
                             <Row>
                                 {blogList.map(blog => {
 
@@ -122,18 +138,11 @@ const Blog = () => {
                                     )
                                 })}
                             </Row>
-                        ) : (
-                            <p>Loading...</p>
-                        )}
+                        ) : (<Loading />)}
                     </Col>
                     <Col lg='4'>
-                        <div>
-                            <select className='rounded blog__category-select' onChange={handleCategoryChange} value={filterValue}>
-                                <option value='all'>Categories</option>
-                                <option className='border-bottom b-2' value='fashion'>Fashion</option>
-                                <option className='border-bottom b-2' value='news'>News</option>
-                                <option className='border-bottom b-2' value='about'>About</option>
-                            </select>
+                        <div className='blog__filter-category-select'>
+                            <Select handleOnChange={handleCategoryChange} filterValue={filterValue} optionList={categoryOptionList} />
                         </div>
                     </Col>
                 </Row>

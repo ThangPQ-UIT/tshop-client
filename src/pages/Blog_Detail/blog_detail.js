@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useParams } from 'react-router'
 
+import Loading from 'components/loading/loading'
+
 import axiosInstance from 'api'
 
 import { formatDate } from 'utilities/formatDate'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 
 const BlogDetail = () => {
     let { slug } = useParams()
 
     const [blog, setBlog] = useState([])
+    const [height, setHeight] = useState()
     const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        setHeightMainContent(setHeight)
+    }, [])
 
     const getData = async () => {
         try {
@@ -38,25 +46,25 @@ const BlogDetail = () => {
     }, [])
 
     return (
-        <>
-            {
-                !isLoaded ? (
-                    <p>Loading...</p>
-                ) : (
-                    <div className='main-content'>
-                        <Container>
-                            <Row className='py-5'>
-                                <Col lg={{ size: '10', offset: '1' }}>
-                                    <h3 className='text-center'>{blog.title}</h3>
-                                    <p>{formatDate(new Date(blog.created_at))}</p>
-                                    <p dangerouslySetInnerHTML={{ __html: blog.content }} className='ckeditor-content'></p>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </div>
-                )
-            }
-        </>
+        <div className='main-content' style={{
+            minHeight: `${height}px`
+        }}>
+            <Container>
+                <Row className='py-5'>
+                    {
+                        isLoaded ? (
+                            <Col lg={{ size: '10', offset: '1' }}>
+                                <h3 className='text-center'>{blog.title}</h3>
+                                <p>{formatDate(new Date(blog.created_at))}</p>
+                                <p dangerouslySetInnerHTML={{ __html: blog.content }} className='ckeditor-content'></p>
+                            </Col>
+                        ) : (
+                            <Loading />
+                        )
+                    }
+                </Row>
+            </Container>
+        </div>
     )
 }
 

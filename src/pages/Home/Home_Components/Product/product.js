@@ -8,9 +8,11 @@ import greaterIcon from 'assets/icons/greater.png'
 import axiosInstance from 'api'
 
 import './style.css'
+import Loading from 'components/loading/loading'
 
 const Product = () => {
 
+    const [isLoaded, setIsLoaded] = useState(false)
     const [productList, setProductList] = useState()
 
     useEffect(() => {
@@ -19,6 +21,7 @@ const Product = () => {
 
     const getData = async () => {
         try {
+            setIsLoaded(false)
             const response = await axiosInstance.get('/products?limit=8')
             const { productList } = response.data
 
@@ -34,6 +37,8 @@ const Product = () => {
             setProductList(data)
         } catch (error) {
             console.log('error: ', error)
+        } finally {
+            setIsLoaded(true)
         }
     }
 
@@ -42,12 +47,12 @@ const Product = () => {
             <Container className='border-top pt-5 pb-3'>
                 <Row>
                     <Col lg={{ size: 10, offset: 1 }}>
-                        <h3 style={{
+                        <p style={{
                             fontSize: '2rem',
                             fontFamily: 'antic-didon'
                         }}>
                             Our Products
-                        </h3>
+                        </p>
                         <div className='d-flex justify-content-between'>
                             <div>
                                 <ul className='d-flex m-0 p-0'>
@@ -109,15 +114,13 @@ const Product = () => {
                     </Col>
                 </Row>
                 <Row>
-                    {
-                        productList ? (
-                            <div className='py-5 home__product-slider'>
+                    <div className='py-5 home__product-slider'>
+                        {
+                            isLoaded ? (
                                 <Slider data={productList} itemWidth='one-fourth' />
-                            </div>
-                        ) : (
-                            <p>loading...</p>
-                        )
-                    }
+                            ) : (<Loading />)
+                        }
+                    </div>
                 </Row>
             </Container>
         </div>

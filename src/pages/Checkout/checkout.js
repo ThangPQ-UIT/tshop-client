@@ -13,6 +13,7 @@ import axiosInstance from 'api'
 const locationAPI = process.env.REACT_APP_LOCATION_API
 
 import './style.css'
+import setHeightMainContent from 'utilities/setHeightMainContent'
 
 const Checkout = () => {
 
@@ -41,17 +42,7 @@ const Checkout = () => {
     const [districtList, setDistrictList] = useState()
 
     useEffect(() => {
-        // Set height for component
-        window.scrollTo(0, 0)
-        const header = document.getElementById('header')
-        const footer = document.getElementById('footer')
-
-        const headerHeight = header.offsetHeight
-        const footerHeight = footer.offsetHeight
-        const screenHeight = window.innerHeight
-
-        const cartHeight = screenHeight - headerHeight - footerHeight
-        setHeight(cartHeight)
+        setHeightMainContent(setHeight)
     }, [])
 
     useEffect(() => {
@@ -203,9 +194,11 @@ const Checkout = () => {
                     minHeight: `${height}px`
                 }}>
                     <Container>
-                        <h3 className='text-center font-weight-bold py-4' style={{
+                        <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
                             color: 'var(--main-color)'
-                        }}>Check out</h3>
+                        }}>
+                            <u>Check out</u>
+                        </h3>
                         <Row className='mb-4'>
                             <Col lg='8' className='py-3 pr-3'>
                                 <h3>Nhap cac chi tiet ve viec gui hang</h3>

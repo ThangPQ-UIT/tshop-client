@@ -7,3 +7,9 @@
 .overlay {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 992px) {
+    .product-detail__images {
+        margin-bottom: 30px;
+    }
+}

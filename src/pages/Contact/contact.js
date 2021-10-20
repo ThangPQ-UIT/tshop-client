@@ -10,11 +10,13 @@ const Contact = () => {
     return (
         <div className='main-content'>
             <Container>
-                <h3 className='text-center py-5 font-weight-bold' style={{
+                <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
                     color: 'var(--main-color)'
-                }}>Contact</h3>
-                <Row className='rounded mb-5'>
-                    <Col lg='6 border-right'>
+                }}>
+                    <u>Contact</u>
+                </h3>
+                <Row className='mb-5 rounded border border-2'>
+                    <Col lg='6 border-right border-2 py-3'>
                         <div className='w-75 m-auto pb-4 px-3'>
                             <h4 className='text-center mb-4'>Send Us A Message</h4>
                             <input type='text' placeholder='Your Email Address' className='w-100 mb-3 pl-2' />
@@ -24,7 +26,7 @@ const Contact = () => {
                             }}>SUBMIT</button>
                         </div>
                     </Col>
-                    <Col lg='6'>
+                    <Col lg='6' className='py-3'>
                         <div className='w-75 m-auto pt-5'>
                             {
                                 ContactData.map(contact => {

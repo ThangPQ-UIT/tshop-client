@@ -1,27 +1,38 @@
+const priceOptionList = [
+    {
+        id: 1,
+        name: 'Price'
+    },
+    {
+        id: 2,
+        name: 'High To Low'
+    },
+    {
+        id: 3,
+        name: 'Low To High'
+    }
+]
 
 const categoriesOptionList = [
     {
         id: 1,
-        to: '',
-        name: 'All products'
+        name: 'Categories'
     },
     {
         id: 2,
-        to: '/men',
         name: 'Men'
     },
     {
         id: 3,
-        to: '/women',
         name: 'Women'
     },
     {
         id: 4,
-        to: '/accessories',
-        name: 'Accessories'
+        name: 'Kid'
     }
 ]
 
 export {
+    priceOptionList,
     categoriesOptionList
 }
