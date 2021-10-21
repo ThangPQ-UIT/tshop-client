@@ -248,6 +248,7 @@ const Header = () => {
                 {isShowNavbar && <NarbarOnMobile
                     isAuthenticated={isAuthenticated}
                     handleShowHideNavbarOnMobile={handleShowHideNavbarOnMobile}
+                    logOut={logOut}
                     name={name}
                     cart={cart}
                 />}

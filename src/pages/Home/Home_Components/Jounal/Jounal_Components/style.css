@@ -21,6 +21,10 @@
     font-family: 'antic-didon';
 }
 
+.home__blog-item-title:hover {
+    color: var(--main-color);
+}
+
 @media only screen and (max-width: 576px) {
     .home__blog-item {
         height: 200px;

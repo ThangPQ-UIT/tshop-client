@@ -99,7 +99,7 @@ const Cart = () => {
             minHeight: `${height}px`
         }}>
             <Container>
-                <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
+                <h3 className='text-center font-weight-bold pt-4 pb-4 pb-lg-5' style={{
                     color: 'var(--main-color)'
                 }}>
                     <u>Shopping cart</u>

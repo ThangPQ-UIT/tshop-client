@@ -13,3 +13,18 @@
         height: 350px;
     }
 }
+
+.home__product-nav {
+    font-size: 1rem;
+    color: var(--main-color);
+}
+
+.home__product-nav:hover {
+    color: var(--main-color);
+}
+
+@media screen and (max-width: 577px) {
+    .home__product-nav {
+        font-size: 0.9rem;
+    }
+}

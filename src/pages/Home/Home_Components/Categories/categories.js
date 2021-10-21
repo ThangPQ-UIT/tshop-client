@@ -11,7 +11,7 @@ const LookingFor = () => {
     return (
         <div>
             <Container>
-                <Row className='py-5' style={{
+                <Row className='py-4 py-lg-5' style={{
                     height: 'max-content'
                 }}>
                     <Col lg={{ size: 10, offset: 1 }}>
@@ -23,7 +23,6 @@ const LookingFor = () => {
                                             <CategoryComponent
                                                 bgImg={category.img}
                                                 name={category.name}
-                                                linkTo={category.linkTo}
                                                 description={category.description}
                                             />
                                         </Col>

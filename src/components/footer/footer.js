@@ -22,7 +22,7 @@ const Footer = () => {
     return (
         <div id='footer'>
             <Container className='pt-3'>
-                <Row className='pb-3'>
+                <Row className='pb-3 px-3'>
                     <Col lg='3' md='6' sm='6' xs='12' className='px-lg-0 pb-4'>
                         <p className=' fw-bolder'>Durotan</p>
                         <p>268, Hoang Van Thu street, ward 2, Tan Binh district, Ho Chi Minh city</p>
@@ -57,7 +57,7 @@ const Footer = () => {
                         <p>Contact us</p>
                         <p>0983162152</p>
                     </Col>
-                    <Col lg='3' md='6' sm='6' xs='6' className='px-lg-0'>
+                    <Col lg='3' sm='6' xs='12' className='px-lg-0'>
                         <p className='fw-bolder'>New letters</p>
                         <p className='small'>Be the first to get the latest news about trend, promotions and much more</p>
                         <input className='w-100 py-2 small' placeholder='Enter your email address' /><br></br>

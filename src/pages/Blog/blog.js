@@ -81,7 +81,7 @@ const Blog = () => {
             backgroundColor: 'var(--main-bg)'
         }}>
             <Container>
-                <h3 className='text-center pt-4 pb-5 font-weight-bold' style={{
+                <h3 className='text-center pt-4 pb-4 pb-lg-5 font-weight-bold' style={{
                     color: 'var(--main-color)'
                 }}>
                     <u>Blog</u>

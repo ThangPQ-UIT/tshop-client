@@ -12,7 +12,7 @@ const Blog = ({ data }) => {
     const year = date.getFullYear()
 
     return (
-        <div className=''>
+        <div className='home__blog-container'>
             <div className='home__blog-item' >
                 <img
                     src={data.thumbnail_image}

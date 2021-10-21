@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactPaginate from 'react-paginate'
+import { useLocation } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
 import Item from './Item_Component/item'
@@ -13,9 +14,15 @@ import './style.css'
 import axiosInstance from 'api'
 import setHeightMainContent from 'utilities/setHeightMainContent'
 
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search)
+}
 const Shop = () => {
 
     const searchInputRef = useRef(null)
+    const query = useQuery()
+    const category = query.get('category')
+    console.log(category)
 
     const [height, setHeight] = useState()
     const [isOpen, setIsOpen] = useState(false)
@@ -25,7 +32,8 @@ const Shop = () => {
     const [searchValue, setSearchValue] = useState('')
     const [productList, setProductList] = useState([])
     const [filterByPrice, setFilterByPrice] = useState('price')
-    const [filterByCategory, setFilterByCategory] = useState('categories')
+    const [filterByCategory, setFilterByCategory] = useState(category)
+
 
     useEffect(() => {
         setHeightMainContent(setHeight)
@@ -106,7 +114,7 @@ const Shop = () => {
             backgroundColor: 'var(--main-bg)',
         }}>
             <Container>
-                <h3 className='text-center font-weight-bold pt-4 pb-5' style={{
+                <h3 className='text-center font-weight-bold pt-4 pb-4 pb-lg-5' style={{
                     color: 'var(--main-color)'
                 }}>
                     <u>Shop</u>

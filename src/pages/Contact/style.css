@@ -1,0 +1,13 @@
+.contact__message-form {
+    width: 75%;
+}
+
+.contact__brands {
+    width: 75%;
+}
+
+@media screen and (max-width: 576px) {
+    .contact__message-form, .contact__brands {
+        width: 95%;
+    }
+}

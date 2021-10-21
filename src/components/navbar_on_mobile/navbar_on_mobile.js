@@ -1,28 +1,42 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
-import userIcon from 'assets/icons/user-regular.svg'
+import logoutIcon from 'assets/icons/logout.svg'
 import bagIcon from 'assets/icons/bag-white.svg'
+import userIcon from 'assets/icons/user-regular.svg'
 import heartIcon from 'assets/icons/heart-white.svg'
-
 import './style.css'
 
-const NarbarOnMobile = ({ handleShowHideNavbarOnMobile, isAuthenticated, name, cart }) => {
+const NarbarOnMobile = ({ handleShowHideNavbarOnMobile, isAuthenticated, logOut, name, cart }) => {
     return (
         <div className='border position-absolute py-3 px-5 navbar-on-mobile'>
             {isAuthenticated ? (
-                <p className='text-white d-flex align-items-center'>
-                    <span className='mr-2 ' style={{
-                        lineHeight: 'initial'
-                    }}>
-                        <img src={userIcon} alt='user icon' height='20px' width='20px' />
-                    </span>
-                    {name}
-                </p>
+                <div className='border-bottom pb-3'>
+                    <p className='text-white d-flex align-items-center'>
+                        <span className='mr-2 ' style={{
+                            lineHeight: 'initial'
+                        }}>
+                            <img src={userIcon} alt='user icon' height='20px' width='20px' />
+                        </span>
+                        {name}
+                    </p>
+                    <Link to='/account' className='mb-2 text-decoration-none d-flex text-center text-white' onClick={handleShowHideNavbarOnMobile}>
+                        <span className='ml-2 text-left'>My account</span>
+                    </Link>
+                    <button
+                        onClick={() => {
+                            handleShowHideNavbarOnMobile()
+                            logOut()
+                        }}
+                        className='border-0 bg-transparent p-0'
+                    >
+                        <span className='ml-2' style={{ color: '#fff' }}>Logout</span>
+                    </button>
+                </div>
             ) : (
                 <div className='border-bottom pb-3'>
-                    <Link to='/login'>Login</Link>
-                    <Link to='/signup' className='ml-4'>Sign up</Link>
+                    <Link to='/login' className='text-white' onClick={handleShowHideNavbarOnMobile}>Login</Link>
+                    <Link to='/signup' className='ml-4 text-white' onClick={handleShowHideNavbarOnMobile}>Sign up</Link>
                 </div>
             )}
             <div className='d-flex my-3 border-bottom pb-3'>

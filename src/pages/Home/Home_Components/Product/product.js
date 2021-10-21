@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
 import Slider from 'components/slider/slider'
@@ -44,7 +44,7 @@ const Product = () => {
 
     return (
         <div>
-            <Container className='border-top pt-5 pb-3'>
+            <Container className='border-top pt-4 pt-lg-5 pb-1 pb-lg-3'>
                 <Row>
                     <Col lg={{ size: 10, offset: 1 }}>
                         <p style={{
@@ -57,58 +57,22 @@ const Product = () => {
                             <div>
                                 <ul className='d-flex m-0 p-0'>
                                     <li className='list-unstyled'>
-                                        <NavLink
-                                            exact
-                                            to='/'
-                                            className='text-decoration-none'
-                                            activeStyle={{
-                                                color: 'var(--main-color)'
-                                            }}
-                                            style={{
-                                                textTransform: 'uppercase',
-                                                fontSize: '0.8rem',
-                                                marginRight: '40px'
-                                            }}
-
-                                        >
+                                        <Link to='/shop' className='text-decoration-none text-capitalize mr-5 home__product-nav'>
                                             best selling
-                                        </NavLink>
+                                        </Link>
                                     </li>
                                     <li className='list-unstyled'>
-                                        <NavLink
-                                            exact
-                                            to='/'
-                                            className='text-decoration-none text-uppercase'
-                                            activeStyle={{
-                                                color: 'var(--main-color)'
-                                            }}
-                                            style={{
-                                                fontSize: '0.8rem'
-                                            }}
-                                        >
+                                        <Link to='/shop' className='text-decoration-none text-capitalize home__product-nav'>
                                             new arrivals
-                                        </NavLink>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
-                            <div className='d-flex align-items-center'>
-                                <NavLink
-                                    exact
-                                    to='/'
-                                    className='text-decoration-none'
-                                    activeStyle={{
-                                        color: 'var(--main-color)'
-                                    }}
-                                    style={{
-                                        textTransform: 'uppercase',
-                                        fontSize: '0.8rem',
-                                        marginRight: '40px'
-                                    }}
-
-                                >
+                            <div className='d-flex align-items-center mr-4'>
+                                <Link to='/shop' className='text-decoration-none text-capitalize home__product-nav'>
                                     view all products
                                     <img src={greaterIcon} alt='greater' height='20px' width='20px' />
-                                </NavLink>
+                                </Link>
                             </div>
                         </div>
                     </Col>

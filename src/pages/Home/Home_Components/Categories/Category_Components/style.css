@@ -5,6 +5,10 @@
     visibility: visible;
 }
 
+.home__category-description {
+    color: var(--main-color);
+}
+
 .shopping-cart {
     animation: slideToRight;
     animation-duration: 1s;
@@ -25,12 +29,13 @@
 .home__category-name {
     font-family: 'antic- didon';
     font-size: 2.5rem;
-    margin: '0px'
+    margin: '0px';
+    color: var(--main-color);
 }
 
 @media (max-width: 576px) {
     .home__category-name {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
 

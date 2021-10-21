@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as Yup from 'yup'
 import { Container } from 'reactstrap'
-import { useDispatch } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 import axiosInstance from 'api'
@@ -15,6 +15,15 @@ const Signup = () => {
     console.log('signup')
     const history = useHistory()
     const dispatch = useDispatch()
+
+    const user = useSelector(state => state.user)
+    const isAuthenticated = user?.isAuthenticated
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            history.push('/')
+        }
+    }, [])
 
     const validate = Yup.object({
         name: Yup.string()
@@ -64,15 +73,15 @@ const Signup = () => {
                             <Form>
                                 <label htmlFor='name' className='d-block label-field mt-3'>Name</label>
                                 <Field name='name' type='text' className='input-field w-100 py-2 rounded small border-0 border-bottom' />
-                                <ErrorMessage name='name' className='text-warning' />
+                                <ErrorMessage name='name' className='text-warning'>{msg => <div className='text-danger small'>{msg}</div>}</ErrorMessage>
 
                                 <label htmlFor='email' className='d-block label-field mt-3'>Email</label>
                                 <Field name='email' type='email' className='input-field w-100 py-2 rounded small border-0 border-bottom' />
-                                <ErrorMessage name='email' className='text-warning' />
+                                <ErrorMessage name='email' className='text-warning'>{msg => <div className='text-danger small'>{msg}</div>}</ErrorMessage>
 
                                 <label htmlFor='password' className='d-block label-field mt-3'>Password</label>
                                 <Field name='password' type='password' autoComplete='on' className='input-field w-100 py-2 rounded small border-0 border-bottom' />
-                                <ErrorMessage name='password' className='text-danger' />
+                                <ErrorMessage name='password' className='text-danger'>{msg => <div className='text-danger small'>{msg}</div>}</ErrorMessage>
 
                                 <button
                                     type='submit'

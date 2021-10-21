@@ -5,26 +5,26 @@ import shoppingCartIcon from 'assets/icons/shopping-cart.svg'
 
 import './style.css'
 
-const Category = ({ bgImg, name, linkTo, description }) => {
+const Category = ({ bgImg, name, description }) => {
     return (
         <div className='border rounded product__item position-relative h-100'>
-            <div className='product-overlay'>
-                <Link to={linkTo}>
+            <Link to={`/shop?category=${name}`}>
+                <div className='product-overlay'>
                     <img src={shoppingCartIcon} width='45px' height='45px' className='shopping-cart' />
-                </Link>
-            </div>
-            <img src={bgImg} alt='men image' height='100%' width='100%' style={{
-                position: 'absolute'
-            }} />
-            <div className='position-absolute' style={{
-                left: '30px',
-                top: '20px',
-            }}>
-                <p className='text-capitalize home__category-name' style={{
+                </div>
+                <img src={bgImg} alt='men image' height='100%' width='100%' style={{
+                    position: 'absolute'
+                }} />
+                <div className='position-absolute' style={{
+                    left: '30px',
+                    top: '20px',
+                }}>
+                    <p className='text-capitalize home__category-name' style={{
 
-                }}>{name}</p>
-                <p className='text-capitalize'>{description}</p>
-            </div>
+                    }}>{name}</p>
+                    <p className='text-capitalize home__category-description'>{description}</p>
+                </div>
+            </Link>
         </div>
     )
 }

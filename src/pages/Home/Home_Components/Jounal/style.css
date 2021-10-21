@@ -1,0 +1,29 @@
+.home__jounal-description {
+    font-size: 1rem;
+    color: var(--main-color);
+}
+
+.home__jounal-link {
+    font-size: 1rem;
+    color: var(--main-color);
+}
+
+.home__jounal-link:hover {
+    color: var(--main-color);
+}
+
+@media screen and (max-width: 576px) {
+    .home__jounal:nth-child(n+3) {
+        display: none;
+    }
+    .home__jounal-description {
+        width: 70%;
+        font-size: 0.9rem;
+    }
+    .home__jounal-link {
+        font-size: 0.9rem;
+    }
+    .home__jounal-link-container {
+        align-items: start;
+    }
+}

@@ -28,7 +28,7 @@ const categoriesOptionList = [
     },
     {
         id: 4,
-        name: 'Kid'
+        name: 'Kids'
     }
 ]
 
