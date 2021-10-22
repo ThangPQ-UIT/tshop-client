@@ -24,8 +24,8 @@ const Checkout = () => {
     const cart = useSelector(state => state.cart)
     const idList = cart.map(item => item.id)
 
-    const [height, setHeight] = useState()
     const [total, setTotal] = useState(0)
+    const [height, setHeight] = useState()
     const [cartData, setCartData] = useState([])
     const [countItem, setCountItem] = useState(0)
     const [locationData, setLocationData] = useState()
@@ -201,8 +201,8 @@ const Checkout = () => {
                         </h3>
                         <Row className='mb-4'>
                             <Col lg='8' className='py-3 pr-3'>
-                                <h3>Nhap cac chi tiet ve viec gui hang</h3>
-                                <p className='font-weight-bold mt-4'>Thong tin lien he</p>
+                                <h3>Fill out the below form to continue for delivery</h3>
+                                <p className='font-weight-bold mt-4'>Contact information</p>
                                 <div className='d-flex w-100 py-3 checkout__user-infor-container'>
                                     <div className='mb-3 user-infor__email-field'>
                                         <span className='d-block mb-2'>Email</span>
@@ -219,7 +219,7 @@ const Checkout = () => {
                                         }} />
                                     </div>
                                 </div>
-                                <p className='font-weight-bold mt-3'>Thong tin giao hang</p>
+                                <p className='font-weight-bold mt-3'>Delivery information</p>
                                 <div className='user-infor__name-field'>
                                     <span className='d-block mb-2'>Name</span>
                                     <input className='w-100 pl-2' type='text' value={formData.name} style={{
@@ -270,34 +270,36 @@ const Checkout = () => {
                                     </div>
                                 </div>
                             </Col>
-                            <Col lg='4' className='py-3' style={{
-                                backgroundColor: 'var(--main-lighter-color)',
-                            }}>
-                                <h4>Chi tiet gio hang</h4>
-                                <div className='checkout__cart-infor-container mt-4'>
-                                    {cartData.map(item => {
-                                        return (
-                                            <CartItem
-                                                key={item.id + item.color + item.size}
-                                                id={item.id}
-                                                name={item.name}
-                                                size={item.size}
-                                                color={item.color}
-                                                price={item.price}
-                                                imgSrc={item.image}
-                                                quantity={item.quantity}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                                <div className='mt-3'>
-                                    <p>{countItem} items</p>
-                                    <p>Delivery fee: free</p>
-                                    <p>Total: ${total}</p>
-                                    <button className='w-100 text-white border-0 my-4 py-2 rounded font-weight-bold' style={{
-                                        backgroundColor: 'var(--main-color)',
-                                        fontSize: '1.2rem',
-                                    }}>CHECK OUT</button>
+                            <Col lg='4'>
+                                <div className='px-3 py-4 rounded' style={{
+                                    backgroundColor: 'var(--main-lighter-color)'
+                                }}>
+                                    <h4>Cart details</h4>
+                                    <div className='checkout__cart-infor-container mt-4'>
+                                        {cartData.map(item => {
+                                            return (
+                                                <CartItem
+                                                    key={item.id + item.color + item.size}
+                                                    id={item.id}
+                                                    name={item.name}
+                                                    size={item.size}
+                                                    color={item.color}
+                                                    price={item.price}
+                                                    imgSrc={item.image}
+                                                    quantity={item.quantity}
+                                                />
+                                            )
+                                        })}
+                                    </div>
+                                    <div className='mt-3'>
+                                        <p>{countItem} items</p>
+                                        <p>Delivery fee: free</p>
+                                        <p>Total: ${total}</p>
+                                        <button className='w-100 text-white border-0 my-4 py-2 rounded font-weight-bold' style={{
+                                            backgroundColor: 'var(--main-color)',
+                                            fontSize: '1.2rem',
+                                        }}>CHECK OUT</button>
+                                    </div>
                                 </div>
                             </Col>
                         </Row>

@@ -22,7 +22,6 @@ const Shop = () => {
     const searchInputRef = useRef(null)
     const query = useQuery()
     const category = query.get('category')
-    console.log(category)
 
     const [height, setHeight] = useState()
     const [isOpen, setIsOpen] = useState(false)
@@ -32,7 +31,7 @@ const Shop = () => {
     const [searchValue, setSearchValue] = useState('')
     const [productList, setProductList] = useState([])
     const [filterByPrice, setFilterByPrice] = useState('price')
-    const [filterByCategory, setFilterByCategory] = useState(category)
+    const [filterByCategory, setFilterByCategory] = useState(category ? category : 'categories')
 
 
     useEffect(() => {

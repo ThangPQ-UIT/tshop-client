@@ -19,9 +19,8 @@ const CartItem = ({ id, name, size, color, price, imgSrc, quantity }) => {
             <div className='d-flex'>
                 <div className='mr-4'>
                     <Link to={`/shop/${id}`}>
-                        <img src={imgSrc} alt='item cart' style={{
+                        <img src={imgSrc} alt='item cart' className='d-block' style={{
                             verticalAlign: 'middle',
-                            display: 'block',
                             maxWidth: '120px',
                             maxHeight: '150px',
                             width: 'auto',
@@ -30,21 +29,10 @@ const CartItem = ({ id, name, size, color, price, imgSrc, quantity }) => {
                     </Link>
                 </div>
                 <div>
-                    <p
-                        style={{
-                            fontWeight: '400',
-                            textTransform: 'uppercase'
-                        }}
-                    >
+                    <p>
                         {name}
                     </p>
-                    <p>
-                        <span style={{
-                            width: '10px',
-                            height: '10px'
-                        }}></span>
-                    </p>
-                    <p>
+                    <p className='small'>
                         <span style={{
                             display: 'inline-block',
                             borderRadius: '50%',

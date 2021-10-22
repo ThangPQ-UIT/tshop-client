@@ -193,24 +193,29 @@ const Account = () => {
 
                                             return (
                                                 <Form>
-                                                    <label className='d-block small' htmlFor='name'>Name</label>
-                                                    <Field
-                                                        id='name'
-                                                        type='text' name='name'
-                                                        className='w-100 rounded py-1 px-2 bg-white'
-                                                        value={values.name}
-                                                        onChange={handleChange}
-                                                    />
-                                                    <ErrorMessage name='name' />
-
                                                     <label className='d-block mt-3 small' htmlFor='email'>Email</label>
                                                     <Field
                                                         id='email'
                                                         type='email'
                                                         name='email'
-                                                        disabled={true} className='w-100 rounded py-1 px-2 bg-white'
+                                                        disabled={true}
+                                                        className='w-100 rounded py-2 px-2 border'
+                                                        style={{
+                                                            backgroundColor: 'var(--main-lighter-color)'
+                                                        }}
                                                         value={values.email}
                                                         onChange={handleChange} />
+
+                                                    <label className='d-block small' htmlFor='name'>Name</label>
+                                                    <Field
+                                                        id='name'
+                                                        type='text' name='name'
+                                                        className='w-100 rounded py-2 px-2 border bg-white'
+                                                        value={values.name}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <ErrorMessage name='name' />
+
                                                     <ErrorMessage name='email' />
 
                                                     <label className='d-block mt-3 small' htmlFor='phoneNumber'>Phone number</label>
@@ -218,7 +223,7 @@ const Account = () => {
                                                         id='phoneNumber'
                                                         type='tel'
                                                         name='phoneNumber' min='9'
-                                                        className='w-100 rounded py-1 px-2'
+                                                        className='w-100 rounded py-2 px-2 border'
                                                         value={values.phoneNumber}
                                                         onChange={handleChange} />
                                                     <ErrorMessage name='phoneNumber' />
@@ -227,7 +232,7 @@ const Account = () => {
                                                     <Field
                                                         name='city'
                                                         as='select'
-                                                        className='w-100 rounded p-2'
+                                                        className='w-100 rounded p-2 border'
                                                         value={values.city}
                                                         onChange={(event) => {
                                                             customHandleChange(event)
@@ -246,7 +251,7 @@ const Account = () => {
                                                     <Field
                                                         name='district'
                                                         as='select'
-                                                        className='w-100 rounded p-2'
+                                                        className='w-100 rounded p-2 border'
                                                         value={values.district}
                                                         onChange={(event) => {
                                                             customHandleChange(event)
@@ -265,7 +270,7 @@ const Account = () => {
                                                     <Field
                                                         name='ward'
                                                         as='select'
-                                                        className='w-100 rounded p-2'
+                                                        className='w-100 rounded p-2 border'
                                                         value={values.ward}
                                                         onChange={handleChange}
                                                     >
@@ -280,13 +285,13 @@ const Account = () => {
                                                         id='street'
                                                         type='text'
                                                         name='street'
-                                                        className='w-100 rounded py-1 px-2'
+                                                        className='w-100 rounded p-2 border'
                                                         value={values.street}
                                                         onChange={handleChange} />
 
                                                     <button
                                                         type='submit'
-                                                        className='mt-3 rounded py-2 px-4 border-0 text-light'
+                                                        className='mt-3 rounded py-2 px-4 mt-4 border-0 text-light text-uppercase'
                                                         disabled={isSubmitting}
                                                         style={{
                                                             backgroundColor: 'var(--main-color)',

@@ -27,11 +27,10 @@ function App() {
 
   return (
     <Router>
-      {/* <Toast component */}
       <div className="App" style={{
-        overflow: 'hidden',
         backgroundColor: 'var(--main-bg)'
       }}>
+        {/* <Toast component */}
         <div className='position-fixed' style={{
           right: '10px',
           zIndex: '5'

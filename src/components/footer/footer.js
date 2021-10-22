@@ -60,20 +60,15 @@ const Footer = () => {
                     <Col lg='3' sm='6' xs='12' className='px-lg-0'>
                         <p className='fw-bolder'>New letters</p>
                         <p className='small'>Be the first to get the latest news about trend, promotions and much more</p>
-                        <input className='w-100 py-2 small' placeholder='Enter your email address' /><br></br>
+                        <input className='w-100 py-2 mb-2 small' placeholder='Enter your email address' /><br></br>
                         <p className='small'>
                             By subscribing, you accept the
                             <a>Privacy Policy</a>
                         </p>
-                        <button style={{
-                            backgroundColor: '#928656',
-                            padding: '8px 18px',
-                            fontSize: '1rem',
-                            fontWeight: 'bolder',
-                            textTransform: 'uppercase',
-                            border: 'none',
-                            color: '#fff'
-                        }}>subcribe</button>
+                        <button className='rounded text-uppercase border-0 text-white' style={{
+                            backgroundColor: 'var(--main-color)',
+                            padding: '9px 18px',
+                        }}>subscribe</button>
                     </Col>
                 </Row>
             </Container>

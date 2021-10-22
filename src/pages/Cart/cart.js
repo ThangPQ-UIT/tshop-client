@@ -19,6 +19,7 @@ const Cart = () => {
     const [cartData, setCartData] = useState([])
     const [countItem, setCountItem] = useState(0)
     const [isLoaded, setIsloaded] = useState(false)
+    const [headerHeight, setHeaderHeight] = useState(0)
 
     const cart = useSelector(state => state.cart)
     const idList = cart.map(item => item.id)
@@ -70,6 +71,10 @@ const Cart = () => {
     }
 
     useEffect(() => {
+        const header = document.getElementById('header')
+        const headerHeight = header.offsetHeight
+        setHeaderHeight(headerHeight)
+
         setHeightMainContent(setHeight)
         handleSetData()
     }, [cart])
@@ -105,8 +110,8 @@ const Cart = () => {
                     <u>Shopping cart</u>
                 </h3>
                 {idList.length ? (
-                    <Row>
-                        <Col lg='7' className='border-right pr-3'>
+                    <Row className='mb-5'>
+                        <Col lg='7' className='border-right pr-3 mb-5 mb-lg-0'>
                             {isLoaded ? cartData.map(item => {
                                 return (
                                     <CartItem
@@ -122,13 +127,12 @@ const Cart = () => {
                                 )
                             }) : (<Loading />)}
                         </Col>
-                        <Col lg='5'>
-                            <div
-                                className='p-3'
-                                style={{
-                                    backgroundColor: '#fff'
-                                }}
-                            >
+                        <Col lg='5' className='mb-lg-0'>
+                            <div className='px-3 py-4 rounded' style={{
+                                position: 'sticky',
+                                top: `calc(${headerHeight}px + 20px)`,
+                                backgroundColor: 'var(--main-lighter-color)'
+                            }}>
                                 <p style={{
                                     fontWeight: '400'
                                 }}>All of your information will be secured</p>
