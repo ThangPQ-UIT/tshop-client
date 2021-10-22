@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ReactPaginate from 'react-paginate'
+import Pagination from 'react-js-pagination'
 import { useLocation } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
 
@@ -17,6 +17,7 @@ import setHeightMainContent from 'utilities/setHeightMainContent'
 const useQuery = () => {
     return new URLSearchParams(useLocation().search)
 }
+
 const Shop = () => {
 
     const searchInputRef = useRef(null)
@@ -63,9 +64,7 @@ const Shop = () => {
     const setData = async (value) => {
         try {
             const { productList, countRow } = await getData(value)
-            const count = Math.ceil(countRow / 8)
-
-            setCountOfItem(count)
+            setCountOfItem(countRow)
             setProductList(productList)
         } catch (error) {
             console.log('error: ', error)
@@ -74,8 +73,9 @@ const Shop = () => {
         }
     }
 
-    const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected + 1)
+    const handlePageClick = (selected) => {
+        console.log(selected)
+        setCurrentPage(selected)
     }
 
     const toggleSearchInput = () => {
@@ -97,6 +97,7 @@ const Shop = () => {
     const handlePriceChange = (event) => {
         const { value } = event.target
         setFilterByPrice(value)
+        setCurrentPage(1)
         return
     }
 
@@ -104,6 +105,7 @@ const Shop = () => {
         const { value } = event.target
         setSearchValue('')
         setFilterByCategory(value)
+        setCurrentPage(1)
         return
     }
 
@@ -162,25 +164,28 @@ const Shop = () => {
                                 )
                             })}
                         </Row>
-                        <Row className='pb-4'>
-                            <Col lg={{ size: '6', offset: '3' }} sm={{ size: '8', offset: '2' }} xs={{ size: '10', offset: '1' }}>
-                                <div lg={{ size: '2', offset: '1' }} md='6'>
-                                    <ReactPaginate
-                                        nextLabel={'next'}
-                                        breakLabel={'...'}
-                                        pageRangeDisplayed={3}
-                                        pageCount={countOfItem}
-                                        marginPagesDisplayed={2}
-                                        previousLabel={'previous'}
-                                        breakClassName={'break-me'}
-                                        onPageChange={handlePageClick}
-                                        containerClassName={'pagination'}
-                                        activeClassName={'pagination-active'}
-                                    />
-                                </div>
-                            </Col>
-                        </Row>
-                    </>) : (<Loading />)}
+                    </>) : (
+                    <div style={{
+                        height: '200px'
+                    }}>
+                        <Loading />
+                    </div>
+                )}
+                {countOfItem > 1 && (
+                    <Row className='pb-4'>
+                        <Col lg={{ size: '6', offset: '3' }} sm={{ size: '8', offset: '2' }} xs={{ size: '10', offset: '1' }}>
+                            <div lg={{ size: '2', offset: '1' }} md='6'>
+                                <Pagination
+                                    activePage={currentPage}
+                                    itemsCountPerPage={8}
+                                    totalItemsCount={countOfItem}
+                                    pageRangeDisplayed={3}
+                                    onChange={handlePageClick}
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                )}
             </Container>
         </div>
     )
